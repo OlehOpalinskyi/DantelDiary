@@ -19,7 +19,6 @@ namespace DentalDiary.Data.Models
         public int CityId { get; set; }
         [ForeignKey("CityId")]
         public virtual CityDataModel City { get; set; }
-        public virtual ICollection<ReceptionDataModel> Receptions { get; set; }
     }
 
 }
