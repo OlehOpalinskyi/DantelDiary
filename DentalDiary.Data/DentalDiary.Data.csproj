@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201709010907229_configDatabase.Designer.cs">
       <DependentUpon>201709010907229_configDatabase.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709010933416_AddReletion.cs" />
+    <Compile Include="Migrations\201709010933416_AddReletion.Designer.cs">
+      <DependentUpon>201709010933416_AddReletion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
@@ -91,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709010907229_configDatabase.resx">
       <DependentUpon>201709010907229_configDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709010933416_AddReletion.resx">
+      <DependentUpon>201709010933416_AddReletion.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

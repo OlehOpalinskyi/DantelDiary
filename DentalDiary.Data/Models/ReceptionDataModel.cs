@@ -20,5 +20,6 @@ namespace DentalDiary.Data.Models
 
         public virtual PersonDataModel Preson { get; set; }
         public virtual CityDataModel City { get; set; }
+        public virtual PriceDataModel Price { get; set; }
     }
 }
