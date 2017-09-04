@@ -76,6 +76,14 @@
     <Compile Include="Migrations\201709011008506_config.Designer.cs">
       <DependentUpon>201709011008506_config.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709011044477_addImagesToPerson.cs" />
+    <Compile Include="Migrations\201709011044477_addImagesToPerson.Designer.cs">
+      <DependentUpon>201709011044477_addImagesToPerson.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709041016380_updatePerson.cs" />
+    <Compile Include="Migrations\201709041016380_updatePerson.Designer.cs">
+      <DependentUpon>201709041016380_updatePerson.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
@@ -105,6 +113,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709011008506_config.resx">
       <DependentUpon>201709011008506_config.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709011044477_addImagesToPerson.resx">
+      <DependentUpon>201709011044477_addImagesToPerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709041016380_updatePerson.resx">
+      <DependentUpon>201709041016380_updatePerson.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

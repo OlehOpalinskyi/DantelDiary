@@ -14,5 +14,6 @@ namespace DentalDiary.Models
         public string PhoneNumber { get; set; }
         public DateTime FirstVisit { get; set; }
         public DateTime LastVisit { get; set; }
+        public string LinkToImages { get; set; }
     }
 }
