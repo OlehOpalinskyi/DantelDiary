@@ -16,6 +16,7 @@ namespace DentalDiary.Data.Models
         public DateTime FirstVisit { get; set; }
         public DateTime LastVisit { get; set; }
         public string LinkToImages { get; set; }
+        public string Recivier { get; set; }
 
         public virtual ICollection<ReceptionDataModel> Receptions { get; set; }
     }

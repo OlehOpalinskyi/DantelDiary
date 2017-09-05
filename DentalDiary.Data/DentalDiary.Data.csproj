@@ -84,6 +84,14 @@
     <Compile Include="Migrations\201709041016380_updatePerson.Designer.cs">
       <DependentUpon>201709041016380_updatePerson.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709051202140_updateReceptions.cs" />
+    <Compile Include="Migrations\201709051202140_updateReceptions.Designer.cs">
+      <DependentUpon>201709051202140_updateReceptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709051212368_updatePerson1.cs" />
+    <Compile Include="Migrations\201709051212368_updatePerson1.Designer.cs">
+      <DependentUpon>201709051212368_updatePerson1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
@@ -119,6 +127,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709041016380_updatePerson.resx">
       <DependentUpon>201709041016380_updatePerson.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709051202140_updateReceptions.resx">
+      <DependentUpon>201709051202140_updateReceptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709051212368_updatePerson1.resx">
+      <DependentUpon>201709051212368_updatePerson1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

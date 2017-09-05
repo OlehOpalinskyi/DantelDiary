@@ -25,6 +25,7 @@ namespace DentalDiary.Controllers
             var httpRequest = HttpContext.Current.Request;
             var imageInfo = HttpContext.Current.Request.Form;
             var folderName = imageInfo.Get("id");
+            var file5 = imageInfo.Get("file");
             var id = Convert.ToInt32(folderName);
             var person = db.Persons.Single(p => p.Id == id);
             if(person.LinkToImages == null)
@@ -35,14 +36,15 @@ namespace DentalDiary.Controllers
                 db.SaveChanges();
             }
             var files = httpRequest.Files;
+
             foreach(string file in files)
             {
                 var postedFile = httpRequest.Files[file];
                 var fileName = postedFile.FileName;
 
                 var upload = await dbx.Files.UploadAsync("/" + folderName + "/" + fileName,
-                    WriteMode.Overwrite.Instance,
-                    body: postedFile.InputStream
+                        WriteMode.Overwrite.Instance,
+                        body: postedFile.InputStream
                     );
             }
             

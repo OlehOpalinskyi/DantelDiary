@@ -29,20 +29,35 @@ namespace DentalDiary.Controllers
             var receptions = db.Receptions.Where(r => r.CityId == id).ToList();
             return Map<ICollection<ReceptionViewModel>>(receptions);
         }
-        [Route("create")]
+        [Route("create/withuser")]
         [HttpPost]
         public ReceptionViewModel CreateReception(ReceptionViewModel rec)
         {
             var dataRecertion = Map<ReceptionDataModel>(rec);
+            var price = db.PriceList.Single(p => p.Id == rec.PriceId);
             var person = db.Persons.Single(p => p.Id == rec.PersonId);
             person.LastVisit = rec.Date;
             var city = db.Cities.Single(c => c.Id == rec.CityId);
+            dataRecertion.PriceCount = price.Price;
+            dataRecertion.PriceName = price.KindOfWork;
+            dataRecertion.Recivier = person.Recivier;
             dataRecertion.Customer = person.FullName;
             dataRecertion.Preson = person;
             dataRecertion.City = city;
             db.Receptions.Add(dataRecertion);
             db.SaveChanges();
             return Map<ReceptionViewModel>(dataRecertion);
+        }
+
+        [Route("create")]
+        [HttpPost]
+        public ReceptionViewModel ReceptionWithoutPerson(Order order)
+        {
+            var dataPerson = Map<PersonDataModel>(order.Person);
+            db.Persons.Add(dataPerson);
+            db.SaveChanges();
+            order.RecInfo.PersonId = dataPerson.Id;
+            return CreateReception(order.RecInfo);
         }
 
         [Route("delete/{id}")]
