@@ -10,6 +10,11 @@ namespace DentalDiary.Data.Models
 {
     public class PriceDataModel
     {
+        public PriceDataModel()
+        {
+            Receptions = new List<ReceptionDataModel>();
+        }
+
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
@@ -19,6 +24,8 @@ namespace DentalDiary.Data.Models
         public int CityId { get; set; }
         [ForeignKey("CityId")]
         public virtual CityDataModel City { get; set; }
+
+        public virtual ICollection<ReceptionDataModel> Receptions { get; set; }
     }
 
 }

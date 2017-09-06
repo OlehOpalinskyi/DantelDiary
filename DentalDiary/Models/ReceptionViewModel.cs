@@ -11,8 +11,10 @@ namespace DentalDiary.Models
         public string Customer { get; set; }
         public DateTime Date { get; set; }
         public string PriceName { get; set; }
+        public string KindOfWork { get; set; }
         public double PriceCount { get; set; }
         public string Recivier { get; set; }
+        public double Payment { get; set; }
 
         public int PersonId { get; set; }
         public int CityId { get; set; }

@@ -92,7 +92,20 @@
     <Compile Include="Migrations\201709051212368_updatePerson1.Designer.cs">
       <DependentUpon>201709051212368_updatePerson1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709060834318_AddCard.cs" />
+    <Compile Include="Migrations\201709060834318_AddCard.Designer.cs">
+      <DependentUpon>201709060834318_AddCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709060904044_ChangeReletionship.cs" />
+    <Compile Include="Migrations\201709060904044_ChangeReletionship.Designer.cs">
+      <DependentUpon>201709060904044_ChangeReletionship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709060949451_AddReletionshipPrice.cs" />
+    <Compile Include="Migrations\201709060949451_AddReletionshipPrice.Designer.cs">
+      <DependentUpon>201709060949451_AddReletionshipPrice.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\CardDataModel.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
     <Compile Include="Models\PersonDataModel.cs" />
@@ -133,6 +146,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709051212368_updatePerson1.resx">
       <DependentUpon>201709051212368_updatePerson1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709060834318_AddCard.resx">
+      <DependentUpon>201709060834318_AddCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709060904044_ChangeReletionship.resx">
+      <DependentUpon>201709060904044_ChangeReletionship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709060949451_AddReletionshipPrice.resx">
+      <DependentUpon>201709060949451_AddReletionshipPrice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -37,6 +37,7 @@ namespace DentalDiary
                 config.CreateMap<CityDataModel, CityViewModel>().ReverseMap();
                 config.CreateMap<ReceptionDataModel, ReceptionViewModel>().ReverseMap();
                 config.CreateMap<PersonDataModel, PersonViewModel>().ReverseMap();
+                config.CreateMap<CardDataModel, CardViewModel>().ReverseMap();
                 
             });
         }

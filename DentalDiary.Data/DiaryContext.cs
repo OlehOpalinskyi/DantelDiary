@@ -3,6 +3,7 @@ namespace DentalDiary.Data
     using Models;
     using System;
     using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
     using System.Linq;
 
     public class DiaryContext : DbContext
@@ -26,6 +27,14 @@ namespace DentalDiary.Data
         public virtual DbSet<PersonDataModel> Persons { get; set; }
         public virtual DbSet<ReceptionDataModel> Receptions { get; set; }
         public virtual DbSet<CityDataModel> Cities { get; set; }
+        public virtual DbSet<CardDataModel> Cards { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+             modelBuilder.Entity<PriceDataModel>().HasMany(i => i.Receptions).WithRequired().WillCascadeOnDelete(false);
+             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
 
     //public class MyEntity

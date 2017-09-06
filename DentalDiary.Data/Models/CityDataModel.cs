@@ -9,6 +9,12 @@ namespace DentalDiary.Data.Models
 {
     public class CityDataModel
     {
+        public CityDataModel()
+        {
+            PriceLists = new List<PriceDataModel>();
+            Receptions = new List<ReceptionDataModel>();
+        }
+
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }

@@ -39,7 +39,7 @@ namespace DentalDiary.Controllers
             person.LastVisit = rec.Date;
             var city = db.Cities.Single(c => c.Id == rec.CityId);
             dataRecertion.PriceCount = price.Price;
-            dataRecertion.PriceName = price.KindOfWork;
+            dataRecertion.PriceName = price.Name;
             dataRecertion.Recivier = person.Recivier;
             dataRecertion.Customer = person.FullName;
             dataRecertion.Preson = person;
