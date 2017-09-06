@@ -154,7 +154,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CardViewModel.cs" />
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\PersonViewModel.cs" />

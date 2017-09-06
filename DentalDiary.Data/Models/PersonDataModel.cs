@@ -26,8 +26,19 @@ namespace DentalDiary.Data.Models
         public DateTime DateOfBirth { get; set; }
         public double Debt { get; set; }
 
-        public int CardId { get; set; }
-        public virtual CardDataModel Card { get; set; }
+        [StringLength(100)]
+        public string Complaints { get; set; }
+        [StringLength(100)]
+        public string LastTreatment { get; set; }
+        [StringLength(100)]
+        public string LastDiagnosis { get; set; }
+        [StringLength(50)]
+        public string FinalDiagnosis { get; set; }
+        [StringLength(100)]
+        public string AnotherOpinion { get; set; }
+        [StringLength(150)]
+        public string TreatmentPlan { get; set; }
+
         public virtual ICollection<ReceptionDataModel> Receptions { get; set; }
     }
 }

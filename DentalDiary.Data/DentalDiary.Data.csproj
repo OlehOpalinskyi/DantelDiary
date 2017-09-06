@@ -104,8 +104,11 @@
     <Compile Include="Migrations\201709060949451_AddReletionshipPrice.Designer.cs">
       <DependentUpon>201709060949451_AddReletionshipPrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709061024359_DeleteCard.cs" />
+    <Compile Include="Migrations\201709061024359_DeleteCard.Designer.cs">
+      <DependentUpon>201709061024359_DeleteCard.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\CardDataModel.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
     <Compile Include="Models\PersonDataModel.cs" />
@@ -155,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709060949451_AddReletionshipPrice.resx">
       <DependentUpon>201709060949451_AddReletionshipPrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709061024359_DeleteCard.resx">
+      <DependentUpon>201709061024359_DeleteCard.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

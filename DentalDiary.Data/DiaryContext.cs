@@ -27,7 +27,6 @@ namespace DentalDiary.Data
         public virtual DbSet<PersonDataModel> Persons { get; set; }
         public virtual DbSet<ReceptionDataModel> Receptions { get; set; }
         public virtual DbSet<CityDataModel> Cities { get; set; }
-        public virtual DbSet<CardDataModel> Cards { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -36,10 +35,4 @@ namespace DentalDiary.Data
              modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
     }
-
-    //public class MyEntity
-    //{
-    //    public int Id { get; set; }
-    //    public string Name { get; set; }
-    //}
 }

@@ -30,6 +30,23 @@ namespace DentalDiary.Controllers
             var person = db.Persons.Single(p => p.Id == id);
             return Map<PersonViewModel>(person);
         }
+
+        //public PersonViewModel GetPersonWithCard(int id)
+        //{
+        //    var person = db.Persons.Single(p => p.Id == id);
+        //    var card = db.Cards.Single(c => c.Id == person.CardId);
+
+        //    var pacient =  Map<PersonViewModel>(person);
+        //    pacient.Complaints = card.Complaints;
+        //    pacient.AnotherOpinion = card.AnotherOpinion;
+        //    pacient.FinalDiagnosis = card.FinalDiagnosis;
+        //    pacient.LastDiagnosis = card.LastDiagnosis;
+        //    pacient.LastTreatment = card.LastTreatment;
+        //    pacient.TreatmentPlan = card.TreatmentPlan;
+
+        //    return pacient;
+        //}
+
         [Route("create")]
         [HttpPost]
         public PersonViewModel AddPerson(PersonViewModel person)
