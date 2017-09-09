@@ -52,61 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DiaryContext.cs" />
-    <Compile Include="Migrations\201708301446542_Init.cs" />
-    <Compile Include="Migrations\201708301446542_Init.Designer.cs">
-      <DependentUpon>201708301446542_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708310946575_AddCityTable.cs" />
-    <Compile Include="Migrations\201708310946575_AddCityTable.Designer.cs">
-      <DependentUpon>201708310946575_AddCityTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709010813344_AddPriceName.cs" />
-    <Compile Include="Migrations\201709010813344_AddPriceName.Designer.cs">
-      <DependentUpon>201709010813344_AddPriceName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709010907229_configDatabase.cs" />
-    <Compile Include="Migrations\201709010907229_configDatabase.Designer.cs">
-      <DependentUpon>201709010907229_configDatabase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709010933416_AddReletion.cs" />
-    <Compile Include="Migrations\201709010933416_AddReletion.Designer.cs">
-      <DependentUpon>201709010933416_AddReletion.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709011008506_config.cs" />
-    <Compile Include="Migrations\201709011008506_config.Designer.cs">
-      <DependentUpon>201709011008506_config.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709011044477_addImagesToPerson.cs" />
-    <Compile Include="Migrations\201709011044477_addImagesToPerson.Designer.cs">
-      <DependentUpon>201709011044477_addImagesToPerson.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709041016380_updatePerson.cs" />
-    <Compile Include="Migrations\201709041016380_updatePerson.Designer.cs">
-      <DependentUpon>201709041016380_updatePerson.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709051202140_updateReceptions.cs" />
-    <Compile Include="Migrations\201709051202140_updateReceptions.Designer.cs">
-      <DependentUpon>201709051202140_updateReceptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709051212368_updatePerson1.cs" />
-    <Compile Include="Migrations\201709051212368_updatePerson1.Designer.cs">
-      <DependentUpon>201709051212368_updatePerson1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709060834318_AddCard.cs" />
-    <Compile Include="Migrations\201709060834318_AddCard.Designer.cs">
-      <DependentUpon>201709060834318_AddCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709060904044_ChangeReletionship.cs" />
-    <Compile Include="Migrations\201709060904044_ChangeReletionship.Designer.cs">
-      <DependentUpon>201709060904044_ChangeReletionship.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709060949451_AddReletionshipPrice.cs" />
-    <Compile Include="Migrations\201709060949451_AddReletionshipPrice.Designer.cs">
-      <DependentUpon>201709060949451_AddReletionshipPrice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201709061024359_DeleteCard.cs" />
-    <Compile Include="Migrations\201709061024359_DeleteCard.Designer.cs">
-      <DependentUpon>201709061024359_DeleteCard.cs</DependentUpon>
+    <Compile Include="Migrations\201709091158597_init.cs" />
+    <Compile Include="Migrations\201709091158597_init.Designer.cs">
+      <DependentUpon>201709091158597_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
@@ -120,47 +68,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201708301446542_Init.resx">
-      <DependentUpon>201708301446542_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708310946575_AddCityTable.resx">
-      <DependentUpon>201708310946575_AddCityTable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709010813344_AddPriceName.resx">
-      <DependentUpon>201709010813344_AddPriceName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709010907229_configDatabase.resx">
-      <DependentUpon>201709010907229_configDatabase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709010933416_AddReletion.resx">
-      <DependentUpon>201709010933416_AddReletion.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709011008506_config.resx">
-      <DependentUpon>201709011008506_config.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709011044477_addImagesToPerson.resx">
-      <DependentUpon>201709011044477_addImagesToPerson.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709041016380_updatePerson.resx">
-      <DependentUpon>201709041016380_updatePerson.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709051202140_updateReceptions.resx">
-      <DependentUpon>201709051202140_updateReceptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709051212368_updatePerson1.resx">
-      <DependentUpon>201709051212368_updatePerson1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709060834318_AddCard.resx">
-      <DependentUpon>201709060834318_AddCard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709060904044_ChangeReletionship.resx">
-      <DependentUpon>201709060904044_ChangeReletionship.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709060949451_AddReletionshipPrice.resx">
-      <DependentUpon>201709060949451_AddReletionshipPrice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201709061024359_DeleteCard.resx">
-      <DependentUpon>201709061024359_DeleteCard.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201709091158597_init.resx">
+      <DependentUpon>201709091158597_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

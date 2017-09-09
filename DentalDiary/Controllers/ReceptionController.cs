@@ -39,6 +39,7 @@ namespace DentalDiary.Controllers
             person.LastVisit = rec.Date;
             var city = db.Cities.Single(c => c.Id == rec.CityId);
             dataRecertion.PriceCount = price.Price;
+            dataRecertion.KindOfWork = price.KindOfWork;
             dataRecertion.PriceName = price.Name;
             dataRecertion.Recivier = person.Recivier;
             dataRecertion.Customer = person.FullName;
@@ -54,6 +55,9 @@ namespace DentalDiary.Controllers
         public ReceptionViewModel ReceptionWithoutPerson(Order order)
         {
             var dataPerson = Map<PersonDataModel>(order.Person);
+            dataPerson.FirstVisit = DateTime.Now;
+            dataPerson.LastVisit = DateTime.Now;
+            dataPerson.DateOfBirth = DateTime.Now;
             db.Persons.Add(dataPerson);
             db.SaveChanges();
             order.RecInfo.PersonId = dataPerson.Id;

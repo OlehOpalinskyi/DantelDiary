@@ -18,9 +18,6 @@ namespace DentalDiary.Models
         public string Recivier { get; set; }
         public DateTime DateOfBirth { get; set; }
         public double Debt { get; set; }
-
-        public int CardId { get; set; }
-
         public string Complaints { get; set; }
         public string LastTreatment { get; set; }
         public string LastDiagnosis { get; set; }

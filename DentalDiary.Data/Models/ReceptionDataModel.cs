@@ -28,8 +28,8 @@ namespace DentalDiary.Data.Models
         public virtual PersonDataModel Preson { get; set; }
         [ForeignKey("CityId")]
         public virtual CityDataModel City { get; set; }
-        [ForeignKey("PriceId")]
-        public virtual PriceDataModel Price { get; set; }
+        //[ForeignKey("PriceId")]
+        //public virtual PriceDataModel Price { get; set; }
 
     }
 }
