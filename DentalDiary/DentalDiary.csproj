@@ -164,6 +164,7 @@
     </Compile>
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\PayOrder.cs" />
     <Compile Include="Models\PersonViewModel.cs" />
     <Compile Include="Models\PriceViewModel.cs" />
     <Compile Include="Models\ReceptionViewModel.cs" />

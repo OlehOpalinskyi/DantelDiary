@@ -37,7 +37,12 @@ namespace DentalDiary
             {
                 config.CreateMap<PriceDataModel, PriceViewModel>().ReverseMap();
                 config.CreateMap<CityDataModel, CityViewModel>().ReverseMap();
-                config.CreateMap<ReceptionDataModel, ReceptionViewModel>().ReverseMap();
+                config.CreateMap<ReceptionDataModel, ReceptionViewModel>()
+                .ForMember(dest => dest.PriceName, opt => opt.ResolveUsing(x => x.Price.Name))
+                .ForMember(dest => dest.KindOfWork, opt => opt.ResolveUsing(x => x.Price.KindOfWork))
+                .ForMember(dest => dest.PriceCount, opt => opt.ResolveUsing(x => x.Price.Price))
+                .ForMember(dest => dest.Customer, opt => opt.ResolveUsing(x => x.Preson.FullName))
+                .ReverseMap();
                 config.CreateMap<PersonDataModel, PersonViewModel>().ReverseMap();
             });
         }

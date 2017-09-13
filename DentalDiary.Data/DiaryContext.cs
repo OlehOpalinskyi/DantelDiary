@@ -28,11 +28,12 @@ namespace DentalDiary.Data
         public virtual DbSet<ReceptionDataModel> Receptions { get; set; }
         public virtual DbSet<CityDataModel> Cities { get; set; }
 
-        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        //{
-        //    base.OnModelCreating(modelBuilder);
-        //    // modelBuilder.Entity<PriceDataModel>().HasMany(i => i.Receptions).WithRequired().WillCascadeOnDelete(false);
-        //    // modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-        //}
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            // modelBuilder.Entity<ReceptionDataModel>().WithRequired().WillCascadeOnDelete(false);
+            modelBuilder.Entity<ReceptionDataModel>().HasRequired(x => x.Price).WithMany().WillCascadeOnDelete(false);
+            // modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
     }
 }

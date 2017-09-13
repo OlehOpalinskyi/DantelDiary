@@ -15,7 +15,6 @@ namespace DentalDiary.Models
         public DateTime FirstVisit { get; set; }
         public DateTime LastVisit { get; set; }
         public string LinkToImages { get; set; }
-        public string Recivier { get; set; }
         public DateTime DateOfBirth { get; set; }
         public double Debt { get; set; }
         public string Complaints { get; set; }

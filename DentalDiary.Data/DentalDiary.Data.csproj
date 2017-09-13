@@ -56,6 +56,18 @@
     <Compile Include="Migrations\201709091158597_init.Designer.cs">
       <DependentUpon>201709091158597_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709121826101_AddDoneColumn.cs" />
+    <Compile Include="Migrations\201709121826101_AddDoneColumn.Designer.cs">
+      <DependentUpon>201709121826101_AddDoneColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709131532539_addReletionship.cs" />
+    <Compile Include="Migrations\201709131532539_addReletionship.Designer.cs">
+      <DependentUpon>201709131532539_addReletionship.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709131546590_deleteREcivier.cs" />
+    <Compile Include="Migrations\201709131546590_deleteREcivier.Designer.cs">
+      <DependentUpon>201709131546590_deleteREcivier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
@@ -70,6 +82,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201709091158597_init.resx">
       <DependentUpon>201709091158597_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709121826101_AddDoneColumn.resx">
+      <DependentUpon>201709121826101_AddDoneColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709131532539_addReletionship.resx">
+      <DependentUpon>201709131532539_addReletionship.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709131546590_deleteREcivier.resx">
+      <DependentUpon>201709131546590_deleteREcivier.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

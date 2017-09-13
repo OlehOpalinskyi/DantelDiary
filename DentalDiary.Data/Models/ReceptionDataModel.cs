@@ -12,13 +12,10 @@ namespace DentalDiary.Data.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Customer { get; set; }
         public DateTime Date { get; set; }
-        public string PriceName { get; set; }
-        public string KindOfWork { get; set; }
-        public double PriceCount { get; set; }
         public string Recivier { get; set; }
         public double Payment { get; set; }
+        public bool Done { get; set; }
 
         public int PersonId { get; set; }
         public int CityId { get; set; }
@@ -28,8 +25,8 @@ namespace DentalDiary.Data.Models
         public virtual PersonDataModel Preson { get; set; }
         [ForeignKey("CityId")]
         public virtual CityDataModel City { get; set; }
-        //[ForeignKey("PriceId")]
-        //public virtual PriceDataModel Price { get; set; }
+        [ForeignKey("PriceId")]
+        public virtual PriceDataModel Price { get; set; }
 
     }
 }

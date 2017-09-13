@@ -29,25 +29,35 @@ namespace DentalDiary.Controllers
             var receptions = db.Receptions.Where(r => r.CityId == id).ToList();
             return Map<ICollection<ReceptionViewModel>>(receptions);
         }
+
+        [Route("diary/{id}")]
+        public ICollection<ReceptionViewModel> GetDiary(int id)
+        {
+            var receptions = db.Receptions.Where(r => r.CityId == id && r.Done == false).ToList();
+            return Map<ICollection<ReceptionViewModel>>(receptions);
+        }
+
         [Route("create/withuser")]
         [HttpPost]
-        public ReceptionViewModel CreateReception(ReceptionViewModel rec)
+        public ReceptionViewModel AddReception(ReceptionViewModel rec)
         {
-            var dataRecertion = Map<ReceptionDataModel>(rec);
-            var price = db.PriceList.Single(p => p.Id == rec.PriceId);
-            var person = db.Persons.Single(p => p.Id == rec.PersonId);
-            person.LastVisit = rec.Date;
-            var city = db.Cities.Single(c => c.Id == rec.CityId);
-            dataRecertion.PriceCount = price.Price;
-            dataRecertion.KindOfWork = price.KindOfWork;
-            dataRecertion.PriceName = price.Name;
-            dataRecertion.Recivier = person.Recivier;
-            dataRecertion.Customer = person.FullName;
-            dataRecertion.Preson = person;
-            dataRecertion.City = city;
-            db.Receptions.Add(dataRecertion);
+            var dataReception = CreateRecption(rec);
+            db.Receptions.Add(dataReception);
             db.SaveChanges();
-            return Map<ReceptionViewModel>(dataRecertion);
+            return Map<ReceptionViewModel>(dataReception);
+        }
+
+        [HttpPut]
+        [Route("edit/{id}")]
+        public ReceptionViewModel EditReception(int id, ReceptionViewModel rec)
+        {
+            var originReception = db.Receptions.Single(r => r.Id == id);
+            var newRec = CreateRecption(rec);
+            newRec.Id = id;
+            db.Entry(originReception).CurrentValues.SetValues(newRec);
+            db.SaveChanges();
+
+            return Map<ReceptionViewModel>(newRec);
         }
 
         [Route("create")]
@@ -61,7 +71,7 @@ namespace DentalDiary.Controllers
             db.Persons.Add(dataPerson);
             db.SaveChanges();
             order.RecInfo.PersonId = dataPerson.Id;
-            return CreateReception(order.RecInfo);
+            return AddReception(order.RecInfo);
         }
 
         [Route("delete/{id}")]
@@ -72,6 +82,48 @@ namespace DentalDiary.Controllers
             db.Receptions.Remove(rec);
             db.SaveChanges();
             return Map<ReceptionViewModel>(rec);
+        }
+
+        [HttpGet]
+        [Route("pay/{id}/{price}")]
+        public ReceptionViewModel Pay(int id, double price)
+        {
+            var rec = db.Receptions.Single(r => r.Id == id);
+            rec.Payment = price;
+            rec.Done = true;
+            if (rec.Price.Price > price)
+            {
+                var debt = rec.Price.Price - price;
+                var person = db.Persons.Single(p => p.Id == rec.PersonId);
+                person.Debt += debt;
+            }
+            db.SaveChanges();
+            return Map<ReceptionViewModel>(rec);
+        }
+
+        [HttpPost]
+        [Route("pay/withorder")]
+        public ReceptionViewModel PayWithOrder(PayOrder pay)
+        {
+            var payFirst = Pay(pay.IdOrder, pay.PriceOne);
+            payFirst.PriceId = pay.PriceId;
+            var rec = AddReception(payFirst);
+            var payTwo = Pay(rec.Id, pay.PriceTwo);
+            return payTwo;
+        }
+
+        private ReceptionDataModel CreateRecption(ReceptionViewModel rec)
+        {
+            var dataRecertion = Map<ReceptionDataModel>(rec);
+            var price = db.PriceList.Single(p => p.Id == rec.PriceId);
+            var person = db.Persons.Single(p => p.Id == rec.PersonId);
+            person.LastVisit = rec.Date;
+            var city = db.Cities.Single(c => c.Id == rec.CityId);
+            dataRecertion.Preson = person;
+            dataRecertion.City = city;
+            dataRecertion.Price = price;
+
+            return dataRecertion;
         }
     }
 }
