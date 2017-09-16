@@ -4,8 +4,6 @@ using DentalDiary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using static AutoMapper.Mapper;
 
@@ -48,6 +46,20 @@ namespace DentalDiary.Controllers
         }
 
         [HttpPut]
+        [Route("edit-diary/{id}")]
+        public ReceptionViewModel EditDiary(int id, Diary diary)
+        {
+            var rec = db.Receptions.Single(r => r.Id == id);
+            rec.Date = diary.Date;
+            var person = db.Persons.Single(p => p.Id == diary.UserId);
+            var price = db.PriceList.Single(p => p.Id == diary.PriceId);
+            rec.Preson = person;
+            rec.Price = price;
+            db.SaveChanges();
+            return Map<ReceptionViewModel>(rec);
+        }
+
+        [HttpPut]
         [Route("edit/{id}")]
         public ReceptionViewModel EditReception(int id, ReceptionViewModel rec)
         {
@@ -76,10 +88,20 @@ namespace DentalDiary.Controllers
 
         [Route("delete/{id}")]
         [HttpDelete]
-        public ReceptionViewModel DeleteReception(int id)
+        public void DeleteReception(int id)
         {
             var rec = db.Receptions.Single(r => r.Id == id);
             db.Receptions.Remove(rec);
+            db.SaveChanges();
+          //  return Map<ReceptionViewModel>(rec);
+        }
+
+        [HttpPut]
+        [Route("edit-recivier/{id}")]
+        public ReceptionViewModel EditRcivier(int id, string recivier)
+        {
+            var rec = db.Receptions.Single(r => r.Id == id);
+            rec.Recivier = recivier;
             db.SaveChanges();
             return Map<ReceptionViewModel>(rec);
         }
@@ -91,12 +113,9 @@ namespace DentalDiary.Controllers
             var rec = db.Receptions.Single(r => r.Id == id);
             rec.Payment = price;
             rec.Done = true;
-            if (rec.Price.Price > price)
-            {
-                var debt = rec.Price.Price - price;
-                var person = db.Persons.Single(p => p.Id == rec.PersonId);
-                person.Debt += debt;
-            }
+            var debt = price - rec.Price.Price;
+            var person = db.Persons.Single(p => p.Id == rec.PersonId);
+            person.Debt += debt;
             db.SaveChanges();
             return Map<ReceptionViewModel>(rec);
         }
