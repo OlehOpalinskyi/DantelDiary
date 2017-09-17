@@ -31,6 +31,14 @@ namespace DentalDiary.Controllers
             return Map<PersonViewModel>(person);
         }
 
+        [HttpGet]
+        [Route("get-receptions/{id}")]
+        public ICollection<ReceptionViewModel> GetReceptions(int id)
+        {
+            var receptions = db.Receptions.Where(r => r.PersonId == id).ToList();
+            return Map<ICollection<ReceptionViewModel>>(receptions);
+        }
+
         [Route("create")]
         [HttpPost]
         public PersonViewModel AddPerson(PersonViewModel person)
