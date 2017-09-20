@@ -27,6 +27,34 @@ namespace DentalDiary.Controllers
             var receptions = db.Receptions.Where(r => r.CityId == id).ToList();
             return Map<ICollection<ReceptionViewModel>>(receptions);
         }
+        [HttpGet]
+        [Route("search-by-customer/{id}")]
+        public ICollection<ReceptionViewModel> SortByCustomer(int id, string customer)
+        {
+            var rec = db.Receptions.Where(r => r.CityId == id && r.Preson.FullName.Contains(customer)).ToList();
+            return Map<ICollection<ReceptionViewModel>>(rec);
+        }
+
+        [HttpGet]
+        [Route("search-by-recivier/{id}")]
+        public ICollection<ReceptionViewModel> SortByRecivier(int id, string customer)
+        {
+            var rec = db.Receptions.Where(r => r.CityId == id && r.Recivier.Contains(customer)).ToList();
+            return Map<ICollection<ReceptionViewModel>>(rec);
+        }
+
+        [Route("sort-by-date")]
+        public ICollection<ReceptionViewModel>SortByDate(DateTime date)
+        {
+            var recs = new List<ReceptionDataModel>();
+            var dbR = db.Receptions.ToList();
+            foreach(var item in dbR)
+            {
+                if (item.Date.Date == date.Date)
+                    recs.Add(item);
+            }
+            return Map<ICollection<ReceptionViewModel>>(recs);
+        }
 
         [Route("diary/{id}")]
         public ICollection<ReceptionViewModel> GetDiary(int id)
