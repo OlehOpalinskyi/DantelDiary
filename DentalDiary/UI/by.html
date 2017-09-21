@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Стоматологія</title>
+    <!-- Bootstrap -->
+    <meta charset="utf-8">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"> 
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html"><img src="http://clipartix.com/wp-content/uploads/2016/04/Tooth-wall-tattoo-medium-pixel-clipart-vector-clip-art-clipartsfree.jpeg" height="100%"> </a>
+            </div>
+            <ul class="nav navbar-nav" id="cities"></ul>
+        </div>
+    </nav> &nbsp; &nbsp; &nbsp;<a href="index.html"><span class="glyphicon glyphicon-home"></span> Назад на головне меню</a>
+    <div class="container">
+        <div class="row">
+      <input type="text" id="myInput" placeholder="Пошук по направниках ..." title="Пошук">                  
+           <hr />            
+                       <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table id="mytable" class="table table-bordred table-striped">
+                                <thead>
+
+                                    <th>Хто направив</th>
+                                    <th>Пацієнт</th>
+                                    <th>Вид робіт</th>
+                                    <th>Група робіт</th>
+                                    <th>Ціна</th>
+                                    <th>Оплата</th>
+                                    <th>Дата</th>
+                                    <th>Змінити</th>
+                                    <th>Видалити</th>
+                                </thead>
+                                <tbody id="table"></tbody>
+                            </table>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+               
+            
+            <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" id="close" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                            <h4 class="modal-title custom_align" id="Heading">Змінити дані</h4> </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <input class="form-control" id="recivier" type="text" placeholder="Хто направив"> 
+                            </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button" class="btn btn-warning btn-lg" id="editRecivier" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Зберегти</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/loadHeader.js"></script>
+    <script src="js/by.js"></script>
+    <script src="js/bootstrap.js"></script>
+    
+
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'ua',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+</script>
+</body>
+    
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Стоматологія</title>
+    <!-- Bootstrap -->
+    <meta charset="utf-8">
+   <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"> 
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#"><img src="http://clipartix.com/wp-content/uploads/2016/04/Tooth-wall-tattoo-medium-pixel-clipart-vector-clip-art-clipartsfree.jpeg" height="100%"> </a>
+            </div>
+            <ul class="nav navbar-nav" id="cities"></ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default class">
+                    <div class="panel-heading">Головна панель</div>
+                    <div class="panel-body text-center">
+                        <div class="row">
+                            <div class="col-md-6 navi">
+                                <button type="button" id="reception" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#newPriyom">Запис на прийом &nbsp; <span class="glyphicon glyphicon-pencil"></span></button>
+                            </div>
+                            <div class="col-md-6 navi">
+                                <a href="users.html">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block">Перегляд пацієнта &nbsp; <span class="glyphicon glyphicon-user"></span></button>
+                                </a>
+                            </div>
+                            <div class="col-md-6 navi">
+                                <a href="preiskurant.html">
+                                    <button type="button" class="btn btn-primary btn-lg btn-block">Прейcкурант &nbsp; <span class="glyphicon glyphicon-list-alt"></span></button>
+                                </a>
+                            </div>
+                            <div class="col-md-6 navi">
+                               <a href="zhurnal.html">
+                                <button type="button" class="btn btn-primary btn-lg btn-block">Журнал &nbsp; <span class="glyphicon glyphicon-book"></span></button>
+                                </a>
+                            </div>
+                            <div class="col-md-6 navi">
+                               <a href="by.html">
+                                <button type="button" class="btn btn-primary btn-lg btn-block">Ким скерований &nbsp; <span class="glyphicon glyphicon-book"></span></button>
+                                </a>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div id="newPriyom" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <!--<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Запис на прийом</h4> </div>-->
+                <div class="modal-body">
+                   <div id="tabs">
+                       <ul>
+                        <li><a href="#tabs-1">Новий пацієнт</a></li>
+                        <li><a href="#tabs-2" id="tab2">Постійний пацієнт</a></li>
+                      </ul>
+                       <div id="tabs-1">
+                           <form>
+                        <div class="input-group col-md-12"> <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input id="name" type="text" class="form-control" name="email" placeholder="Прізвище Ім'я Побатькові"> 
+                        </div>
+                            <br />
+                        <div class="input-group col-md-12"> <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                            <input id="tel" type="text" class="form-control" name="tel" placeholder="Телефон"> 
+                        </div>
+                            <br />
+                        <div class="input-group col-md-12"> <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input id="adress" type="text" class="form-control" name="adresa" placeholder="Адреса"> 
+                        </div>
+                          <br />
+                           <div class="input-group col-md-12"> <span class="input-group-addon"><i class="glyphicon glyphicon-hand-right"></i></span>
+                            <input id="recivier" type="text" class="form-control" name="recivier" placeholder="Ким скерований"> 
+                        </div>
+                            <br />
+                        <div class="form-group">
+                            <label for="dtp_input2" class="сol-md-2 control-label">Дата запису</label>
+                            <div class="input-group date form_date col-md-10" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                    <input class="form-control" size="16" type="text" id="date" value="" readonly>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" />
+                        </div>
+                           
+                       <div class="form-group">
+                           <label for="dtp_input3" class="сol-md-2 control-label">Час запису</label>
+                            <div class="input-group date form_time col-md-10" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                <input class="form-control" size="16" id="time" type="text" value="" readonly>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input3" value="" /><br/>
+                        </div>
+                    
+                 
+                     <div class="form-group">
+                        <label class="сol-md-2 control-label">Група робіт</label>
+                        <select class="selectpicker" id="namePrice" data-size="5"></select>
+                   </div>
+                   <hr />
+                   
+                   <div class="text-center">
+                    <button type="button" id="sub" class="btn btn-success btn-lg">Записати на прийом</button>
+                   </div>
+                        
+                    </form>
+                       </div>
+                       <div id="tabs-2">
+                           <p><select name="users" id="users"></select><button class="btn btn-success" id="withUser">Записати</button></p>
+                            <div class="input-group col-md-12"> <span class="input-group-addon"><i class="glyphicon glyphicon-hand-right"></i></span>
+                            <input id="recivierWU" type="text" class="form-control" name="recivier" placeholder="Ким скерований"> 
+                        </div>
+                            <br />
+                        <div class="form-group">
+                            <label for="dtp_input2" class="сol-md-2 control-label">Дата запису</label>
+                            <div class="input-group date form_date col-md-10" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                    <input class="form-control" size="16" type="text" id="dateWU" value="" readonly>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" />
+                        </div>
+                           
+                       <div class="form-group">
+                           <label for="dtp_input3" class="сol-md-2 control-label">Час запису</label>
+                            <div class="input-group date form_time col-md-10" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                <input class="form-control" size="16" id="timeWU" type="text" value="" readonly>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input3" value="" /><br/>
+                        </div>
+                        
+                     <div class="form-group">
+                        <label class="сol-md-2 control-label">Група робіт</label>
+                        <select class="selectpicker" id="namePriceWU" data-size="5"></select>
+                   </div>
+                       </div>                        
+                   </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/loadHeader.js"></script>
+    <script src="js/main.js"></script>
+    
+
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'ua',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+</script>
+</body>
+
+</html>

@@ -149,6 +149,12 @@
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="UI\asd.html" />
+    <Content Include="UI\by.html" />
+    <Content Include="UI\index.html" />
+    <Content Include="UI\preiskurant.html" />
+    <Content Include="UI\users.html" />
+    <Content Include="UI\zhurnal.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -185,6 +191,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UI\css\" />
+    <Folder Include="UI\fonts\" />
+    <Folder Include="UI\img\" />
+    <Folder Include="UI\js\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DentalDiary.Data\DentalDiary.Data.csproj">

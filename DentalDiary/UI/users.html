@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Стоматологія</title>
+    <!-- Bootstrap -->
+    <meta charset="utf-8">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"> 
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html"><img src="http://clipartix.com/wp-content/uploads/2016/04/Tooth-wall-tattoo-medium-pixel-clipart-vector-clip-art-clipartsfree.jpeg" height="100%"> </a>
+            </div>
+            <ul class="nav navbar-nav" id="cities"></ul>
+        </div>
+    </nav> &nbsp; &nbsp; &nbsp;<a href="index.html"><span class="glyphicon glyphicon-home"></span> Назад на головне меню</a>
+    <div class="container">
+        <div class="row">
+
+            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Пошук..." title="Пошук">
+              <p style="font-weight: bold;">Кількість пацієнтів - <span id="count"></span></p>
+                   <hr />
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table id="mytable" class="table table-bordred table-striped">
+                                <thead>
+
+                                    <th>ПІП</th>
+                                    <th>Адреса</th>
+                                    <th>Email</th>
+                                    <th>Телефон</th>
+                                    <th>Видалити</th>
+                                    <th>Карточка</th>
+                                </thead>
+                                <tbody id="table">
+                                </tbody>
+                            </table>
+                            <div class="clearfix"></div>
+                            <ul class="pagination pull-right">
+                                <li class="disabled"><a href="#"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                                <li class="active"><a href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li><a href="#">3</a></li>
+                                <li><a href="#">4</a></li>
+                                <li><a href="#">5</a></li>
+                                <li><a href="#"><span class="glyphicon glyphicon-chevron-right"></span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+        
+        <div id="pacient" class="modal fade" role="dialog">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title text-center">Перегляд пацієнта</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-5">
+                <h3>
+                    <span class="glyphicon glyphicon-user"></span>
+                    <input class="input" type="text" id="name">
+                </h3>
+                <hr />
+                <h4>
+                <div class="row">
+                    <div class="col-md-4"><span class="glyphicon glyphicon-earphone"></span>Телефон</div><div class="col-md-8">
+                        <input class="input" type="text" id="phone">
+                    </div>
+                </div>
+                 <hr />
+                <div class="row"> 
+                    <div class="col-md-4"><span class="glyphicon glyphicon-envelope"></span> Email</div><div class="col-md-8">
+                        <input class="input" type="text" id="email">
+                    </div>
+                </div>
+                <hr />
+                <div class="row">      
+                    <div class="col-md-6"><span class="glyphicon glyphicon-home"></span>  Адреса</div><div class="col-md-6">
+                        <input class="input" type="text" id="address">
+                    </div>
+                </div>
+                <hr />
+                <div class="row">   
+                    <div class="col-md-6"><span class="glyphicon glyphicon-dashboard"></span> Рік народження</div><div class="col-md-6">
+                        <input class="input" type="date" id="dob">
+                    </div>
+                </div>
+                <hr />
+                <div class="row">   
+                    <div class="col-md-6"><span class="glyphicon glyphicon-download"></span> Первинний візит</div><div class="col-md-6">
+                        <input class="input" type="date" id="fVisit">
+                    </div>
+                </div>
+                <hr />
+                <div class="row">   
+                    <div class="col-md-6"><span class="glyphicon glyphicon-upload"></span> Останній візит</div><div class="col-md-6">
+                        <input class="input" type="date" id="lVisit">
+                    </div>
+                </div>
+                <hr />
+                <div class="row">   
+                    <div class="col-md-4"><span class="glyphicon glyphicon-upload"></span> Борг</div><div class="col-md-8" style="color:red;">
+                     <input type="number" id="debt">
+                     </div>
+                </div>
+                <hr />
+                <button type="button" class="btn btn-primary" id="save">Зберегти</button>
+            </h4>
+            </div>
+            
+            <div class="col-md-4">
+                <p><strong>Скарги</strong></p><textarea id="complaints" cols="40" rows="5"></textarea>
+                <p><strong>Попереднє ортодонтичне лікування</strong></p><textarea id="lastTreatment" cols="40" rows="5"></textarea> 
+                <p><strong><p>Попередній діагноз</strong></p><textarea id="lastDiagnosis" cols="40" rows="5"></textarea>
+                <p><strong><p>Остаточний діагноз</strong></p><textarea id="finishDiagnosis" cols="40" rows="5"></textarea>
+                <p><strong><p>Консультація суміжних спеціалістів</strong></p><textarea id="advice" cols="40" rows="5"></textarea>
+                <p><strong><p>План лікування</strong></p><textarea id="treatment" cols="40" rows="5"></textarea>
+            </div>
+            
+            <div class="col-md-3">
+                    <form enctype="multipart/form-data" method="post" action="http://localhost:50612/addimages">
+                       <p> загрузити нові фото</p>
+                       <p><input type="file" name="photo" id="img" multiple accept="image/*"><br />
+                       <input type="hidden" name="id" id="id">
+                       <input type="button" value="Зберегти" id="sendImg"></p>
+                       <button type="button" value="Галарея"><a href="" id="galary" target="_blank">Галарея</a></button>
+                    </form>
+            </div>
+            <div class="col-md-12" style="margin-top: 40px;">
+                        <div class="table-responsive">
+                            <table id="mytable" class="table table-bordred table-striped">
+                                <thead>
+                                    <th>Назва</th>
+                                    <th>Група робіт</th>
+                                    <th>Ціна</th>
+                                    <th>Оплата</th>
+                                    <th>Дата</th>
+                                </thead>
+                                <tbody id="table">
+                                </tbody>
+                            </table>
+                            
+                            
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+            
+            
+            
+        </div>
+        
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Закрити</button>
+      </div>
+    </div>
+
+  </div>
+</div>    
+    </div>
+    </div>    
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script src="js/loadHeader.js"></script>
+    <script src="js/users.js"></script>
+    
+
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'ua',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+</script>
+</body>
+
+</html>

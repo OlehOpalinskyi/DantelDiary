@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Стоматологія</title>
+    <!-- Bootstrap -->
+    <meta charset="utf-8">
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-theme.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet"> 
+    <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html"><img src="http://clipartix.com/wp-content/uploads/2016/04/Tooth-wall-tattoo-medium-pixel-clipart-vector-clip-art-clipartsfree.jpeg" height="100%"> </a>
+            </div>
+            <ul class="nav navbar-nav" id="cities">
+            </ul>
+        </div>
+    </nav> &nbsp; &nbsp; &nbsp;<a href="index.html"><span class="glyphicon glyphicon-home"></span> Назад на головне меню</a>
+    <div class="container">
+        <div class="row">
+      <input type="text" id="myInput" placeholder="Пошук по ПІП ..." title="Пошук">
+               
+                    
+           <hr />            
+                       <div class="col-md-9">
+                        <div class="table-responsive">
+                            <table id="mytable" class="table table-bordred table-striped">
+                                <thead>
+
+                                    
+                                    <th>ПІП</th>
+                                    <th>Вид робіт</th>
+                                    <th>Група робіт</th>
+                                    <th>Ціна</th>
+                                    <th>Дата</th>
+                                    <th>Година</th>
+                                    <th>Змінити</th>
+                                    <th>Видалити</th>
+                                    <th>Завершити</th>
+                                </thead>
+                                <tbody id="table">
+                                </tbody>
+                            </table>
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+                    
+                     
+                       <div class="col-md-3">
+                           <div class="input-group date form_date col-md-10" data-date="" data-date-format="dd.mm.yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                            </div>
+                            
+                       </div>
+                    
+               
+            
+            <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                            <h4 class="modal-title custom_align" id="Heading">Змінити дані</h4> </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <select name="users" id="editUsers"></select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker" data-size="5" id="editWork"></select>
+                            </div>
+                               <div class="form-group">
+                            <label for="dtp_input2" class="сol-md-2 control-label">Дата запису</label>
+                            <div class="input-group date form_date col-md-10" data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                                    <input class="form-control" id="date" size="16" type="text" value="" readonly>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input2" value="" />
+                        </div>
+                          <div class="form-group">
+                           <label for="dtp_input3" class="сol-md-2 control-label">Час запису</label>
+                            <div class="input-group date form_time col-md-10" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
+                                <input class="form-control" id="time" size="16" type="text" value="" readonly>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+                            </div>
+                            <input type="hidden" id="dtp_input3" value="" /><br/>
+                        </div>
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button" id="editDiary" class="btn btn-warning btn-lg" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Зберегти</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            
+            
+            <div class="modal fade" id="finish" tabindex="-1" role="dialog" aria-labelledby="finish" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                            <h4 class="modal-title custom_align" id="Heading">Змінити дані</h4> </div>
+                        <div class="modal-body">
+                           <p>Оплата за послугу</p>
+                            <div class="form-group">
+                                <input class="form-control" id="pay1" type="text" placeholder="Оплата"> 
+                            </div>
+                            <hr />
+                            <p>Додати ще групу робіт (якшо така була)</p>
+                            <div class="form-group">
+                                <select class="selectpicker" data-size="5" id="work"></select>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id="pay2" type="text" placeholder="Оплата"> 
+                            </div>
+                              
+                          
+                        </div>
+                        <div class="modal-footer ">
+                            <button type="button" class="btn btn-warning btn-lg" id="pay" style="width: 100%;"><span class="glyphicon glyphicon-ok-sign"></span> Зберегти</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        </div>
+    </div>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/loadHeader.js"></script>
+    
+    <script src="js/bootstrap.js"></script>
+    
+
+<script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.uk.js" charset="UTF-8"></script>
+<script type="text/javascript">
+    $('.form_datetime').datetimepicker({
+        //language:  'ua',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });
+	$('.form_date').datetimepicker({
+        language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$('.form_time').datetimepicker({
+        language:  'uk',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 1,
+		minView: 0,
+		maxView: 1,
+		forceParse: 0
+    });
+</script>
+<script src="js/zhurnal.js"></script>
+</body>
+    
+</html>
