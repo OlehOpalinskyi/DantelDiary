@@ -51,7 +51,7 @@ $(function() {
                 str += "<tr><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" + 
                     data[i].payment + "</td><td>" + date + "</td></tr>";
             }
-            $("#table").html(str);
+            $("#tableUser").html(str);
         });
         
         });

@@ -151,7 +151,28 @@
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="UI\asd.html" />
     <Content Include="UI\by.html" />
+    <Content Include="UI\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="UI\css\bootstrap-theme.css" />
+    <Content Include="UI\css\bootstrap.css" />
+    <Content Include="UI\css\style.css" />
+    <Content Include="UI\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="UI\img\bg.png" />
+    <Content Include="UI\img\foto-1.jpg" />
+    <Content Include="UI\img\foto-2.jpg" />
+    <Content Include="UI\img\foto-3.jpg" />
+    <Content Include="UI\img\searchicon.png" />
     <Content Include="UI\index.html" />
+    <Content Include="UI\js\bootstrap-datetimepicker.js" />
+    <Content Include="UI\js\bootstrap-datetimepicker.uk.js" />
+    <Content Include="UI\js\bootstrap.js" />
+    <Content Include="UI\js\by.js" />
+    <Content Include="UI\js\functions.js" />
+    <Content Include="UI\js\jquery-1.8.3.min.js" />
+    <Content Include="UI\js\loadHeader.js" />
+    <Content Include="UI\js\main.js" />
+    <Content Include="UI\js\price.js" />
+    <Content Include="UI\js\users.js" />
+    <Content Include="UI\js\zhurnal.js" />
     <Content Include="UI\preiskurant.html" />
     <Content Include="UI\users.html" />
     <Content Include="UI\zhurnal.html" />
@@ -182,6 +203,10 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="UI\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="UI\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="UI\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="UI\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -191,10 +216,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="UI\css\" />
-    <Folder Include="UI\fonts\" />
-    <Folder Include="UI\img\" />
-    <Folder Include="UI\js\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DentalDiary.Data\DentalDiary.Data.csproj">
