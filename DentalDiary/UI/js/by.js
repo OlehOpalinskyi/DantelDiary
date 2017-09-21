@@ -7,7 +7,7 @@ $(function() {
         var id = $(this).data("id");
         var that = $(this);
         $.ajax({
-            url: "http://localhost:50612/receptions/delete/" + id,
+            url: "http://dentaldiary.gearhostpreview.com/receptions/delete/" + id,
             method: "DELETE"
         }).done(function(data) {
             that.closest("tr").remove();
@@ -22,7 +22,7 @@ $(function() {
     $("#editRecivier").click(function() {
         var recivier = $("#recivier").val();
         $.ajax({
-            url: "http://localhost:50612/receptions/edit-recivier/" + id + "?recivier=" + recivier,
+            url: "http://dentaldiary.gearhostpreview.com/receptions/edit-recivier/" + id + "?recivier=" + recivier,
             method: "PUT"
         }).done(function(data) {
             console.log(data);
@@ -34,7 +34,7 @@ $(function() {
     $("#myInput").keypress(function(e) {
         if(e.which == 13) {
             $.ajax({
-                url: "http://localhost:50612/receptions/search-by-recivier/" + cityId,
+                url: "http://dentaldiary.gearhostpreview.com/receptions/search-by-recivier/" + cityId,
                 method: "GET",
                 data:{customer: $(this).val()},
                 success: function(data) {
@@ -53,7 +53,7 @@ $(function() {
     
     function GetAll() {
         $.ajax({
-        url: "http://localhost:50612/receptions/bycity/" + cityId,
+            url: "http://dentaldiary.gearhostpreview.com/receptions/bycity/" + cityId,
         method: "GET"
     }).done(function(data) {
         BuildTable(data)

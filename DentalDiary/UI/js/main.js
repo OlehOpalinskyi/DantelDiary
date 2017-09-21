@@ -11,7 +11,7 @@ $(function() {
     $("#reception").click(function() {
         var cityId = localStorage.getItem("city");
         $.ajax({
-            url: "http://localhost:50612/pricelist/bycity/" + cityId,
+            url: "http://dentaldiary.gearhostpreview.com/pricelist/bycity/" + cityId,
             method: "GET"
         }).done(function(data) {
             var str = "";
@@ -24,7 +24,7 @@ $(function() {
         
         $("#tab2").click(function() {
             $.ajax({
-                url: "http://localhost:50612/person/all",
+                url: "http://dentaldiary.gearhostpreview.com/person/all",
                 method: "GET"
             }).done(function(data) {
                 var str = "";
@@ -51,7 +51,7 @@ $(function() {
                 priceId: price
             };
             $.ajax({
-                url: "http://localhost:50612/receptions/create/withuser",
+                url: "http://dentaldiary.gearhostpreview.com/receptions/create/withuser",
                 method: "POST",
                 data: obj
             }).done(function(data) {
@@ -87,7 +87,7 @@ $(function() {
                 }
             };
             $.ajax({
-                url: "http://localhost:50612/receptions/create",
+                url: "http://dentaldiary.gearhostpreview.com/receptions/create",
                 method: "POST",
                 data: obj
             }).done(function(data) {

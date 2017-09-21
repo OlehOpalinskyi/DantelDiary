@@ -6,7 +6,7 @@ $(function() {
         var id = $(this).data("id");
         var that = $(this);
         $.ajax({
-            url: "http://localhost:50612/person/delete/" + id,
+            url: "http://dentaldiary.gearhostpreview.com/person/delete/" + id,
             method: "DELETE"
         }).done(function(data) {
             that.closest("tr").remove();
@@ -18,7 +18,7 @@ $(function() {
             $("#id").val(id);
             idPerson = id;
             $.ajax({
-                url: "http://localhost:50612/person/" + id,
+                url: "http://dentaldiary.gearhostpreview.com/person/" + id,
                 method: "get"
             }).done(function(data) {
                 var dob = ToDateString(data.dateOfBirth);
@@ -42,7 +42,7 @@ $(function() {
             });
         
         $.ajax({
-            url: "http://localhost:50612/person/get-receptions/" + id,
+            url: "http://dentaldiary.gearhostpreview.com/person/get-receptions/" + id,
             method: "get"
         }).done(function(data) {
             var str = "";
@@ -77,7 +77,7 @@ $(function() {
             treatmentPlan: $("#treatment").val()
         };
         $.ajax({
-            url: "http://localhost:50612/person/edit/" + idPerson,
+            url: "http://dentaldiary.gearhostpreview.com/person/edit/" + idPerson,
             method: "PUT",
             data: obj
         }).done(function(data) {
@@ -93,7 +93,7 @@ $(function() {
         data.append("id", $("#id").val());
         
         jQuery.ajax({
-            url: 'http://localhost:50612/addimages',
+            url: 'http://dentaldiary.gearhostpreview.com/addimages',
             data: data,
             cache: false,
             contentType: false,
@@ -123,7 +123,7 @@ $(function() {
     
     function BuildTable() {
         $.ajax({
-            url: "http://localhost:50612/person/all",
+            url: "http://dentaldiary.gearhostpreview.com/person/all",
             method: "GET"
         }).done(function(data) {
             var count = data.length;

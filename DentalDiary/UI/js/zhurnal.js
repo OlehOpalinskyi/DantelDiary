@@ -4,7 +4,7 @@ $(function() {
     var orderId;
     GetAll();
     $.ajax({
-            url: "http://localhost:50612/pricelist/bycity/" + cityId,
+        url: "http://dentaldiary.gearhostpreview.com/pricelist/bycity/" + cityId,
             method: "GET"
         }).done(function(data) {
             var str = "";
@@ -16,7 +16,7 @@ $(function() {
         });
     
     $.ajax({
-                url: "http://localhost:50612/person/all",
+        url: "http://dentaldiary.gearhostpreview.com/person/all",
                 method: "GET"
             }).done(function(data) {
                 var str = "";
@@ -37,7 +37,7 @@ $(function() {
         var priceTwo = $("#pay2").val() * 1;
         if(priceTwo == "") {
             $.ajax({
-                url: "http://localhost:50612/receptions/pay/" + orderId + "/" + priceOne,
+                url: "http://dentaldiary.gearhostpreview.com/receptions/pay/" + orderId + "/" + priceOne,
                 method: "GET"
             }).done(function(data) {
                 $("#pay1").val("");
@@ -55,7 +55,7 @@ $(function() {
             };
             
             $.ajax({
-                url: "http://localhost:50612/receptions/pay/withorder",
+                url: "http://dentaldiary.gearhostpreview.com/receptions/pay/withorder",
                 method: "POST",
                 data: obj
             }).done(function(data) {
@@ -70,7 +70,7 @@ $(function() {
     $("#myInput").keypress(function(e) {
         if(e.which == 13) {
             $.ajax({
-                url: "http://localhost:50612/receptions/search-by-customer/" + cityId,
+                url: "http://dentaldiary.gearhostpreview.com/receptions/search-by-customer/" + cityId,
                 method: "GET",
                 data:{customer: $(this).val()},
                 success: function(data) {
@@ -102,7 +102,7 @@ $(function() {
             priceId: $("#editWork").val()
         };
         $.ajax({
-            url: "http://localhost:50612/receptions/edit-diary/" + orderId,
+            url: "http://dentaldiary.gearhostpreview.com/receptions/edit-diary/" + orderId,
             method: "PUT",
             data: obj
         }).done(function(data) {
@@ -119,7 +119,7 @@ $(function() {
         var that = $(this);
         console.log(id);
         $.ajax({
-            url: "http://localhost:50612/receptions/delete/" + id,
+            url: "http://dentaldiary.gearhostpreview.com/receptions/delete/" + id,
             method: "DELETE"
         }).done(function(data) {
             that.closest("tr").remove();
@@ -137,7 +137,7 @@ $(function() {
              day = "0" + day;
          var dateStr = year + "-" + mounth + "-" + day;
          $.ajax({
-             url: "http://localhost:50612/receptions/sort-by-date?date=" + dateStr,
+             url: "http://dentaldiary.gearhostpreview.com/receptions/sort-by-date?date=" + dateStr,
              method: "post",
              data: {date: dateStr},
              success: function(data) {
@@ -148,7 +148,7 @@ $(function() {
     
     function GetAll() {
         $.ajax({
-        url: "http://localhost:50612/receptions/diary/" + cityId,
+        url: "http://dentaldiary.gearhostpreview.com/receptions/diary/" + cityId,
         method: "GET"
     }).done(function(data) {
         BuildTable(data);

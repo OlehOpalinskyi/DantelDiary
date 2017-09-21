@@ -14,7 +14,7 @@ $(function() {
             cityId: cityId
         };
         $.ajax({
-            url: "http://localhost:50612/pricelist/create",
+            url: "http://dentaldiary.gearhostpreview.com/pricelist/create",
             method: "POST",
             data: price
         }).done(function(data) {
@@ -30,7 +30,7 @@ $(function() {
         var id = $(this).data("id");
         var that = $(this);
         $.ajax({
-            url: "http://localhost:50612/pricelist/delete/" + id,
+            url: "http://dentaldiary.gearhostpreview.com/pricelist/delete/" + id,
             method: "DELETE"
         }).done(function(data) {
            that.closest("tr").remove();
@@ -46,7 +46,7 @@ $(function() {
             cityId: cityId
         };
         $.ajax({
-            url: "http://localhost:50612/pricelist/edit/" + upId,
+            url: "http://dentaldiary.gearhostpreview.com/pricelist/edit/" + upId,
             method: "PUT",
             data: price
         }).done(function(data) {
@@ -62,7 +62,7 @@ $(function() {
     
     function BuildTable(data) {
        $.ajax({
-       url: "http://localhost:50612/pricelist/bycity/" + cityId,
+           url: "http://dentaldiary.gearhostpreview.com/pricelist/bycity/" + cityId,
        method: "GET"
    }).done(function(data) {
        var str = "";
