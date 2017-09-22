@@ -21,7 +21,7 @@ namespace DentalDiary.Controllers
         [Route("addimages")]
         public async Task<string> UploadImages()
         {
-            var dbx = new DropboxClient("zmZXUjw_0iAAAAAAAAAAHcDiDjUBP7lc7plc576DbJdaEerfaT90i6kAj0081TLu");
+            var dbx = new DropboxClient("dFGrDDHKleAAAAAAAAAACODkbHvHws-ALyJURDE95FlWqr3nCLqJMWqEd78fCiId");
             var httpRequest = HttpContext.Current.Request;
             var imageInfo = HttpContext.Current.Request.Form;
             var folderName = imageInfo.Get("id");
@@ -30,7 +30,7 @@ namespace DentalDiary.Controllers
             if(person.LinkToImages == null)
             {
                 var folder = await dbx.Files.CreateFolderAsync("/" + folderName);
-                var baseUrl = "https://www.dropbox.com/home/Приложения/DanteDiary/";
+                var baseUrl = "https://www.dropbox.com/home/";
                 person.LinkToImages = baseUrl + folderName;
                 db.SaveChanges();
             }

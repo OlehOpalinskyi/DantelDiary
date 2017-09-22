@@ -38,7 +38,8 @@ $(function() {
     });
     
     var upId;
-    $("#upPrice").click(function() {
+    $("#upPrice").click(function () {
+        var that = $(this);
         var price = {
             name: $("#editName").val(),
             price: $("#editPrice").val(),
@@ -48,22 +49,38 @@ $(function() {
         $.ajax({
             url: "http://dentaldiary.gearhostpreview.com/pricelist/edit/" + upId,
             method: "PUT",
-            data: price
+            data: price,
+            beforeSend: function () {
+                that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>')
+            }
         }).done(function(data) {
             BuildTable();
-           // $('#edit').hide();
+            that.html('<span class="glyphicon glyphicon-ok-sign"></span> Update');
+            $(".close").click();
         });
     });
     
     $(document).on("click", ".editB", function() {
         var id = $(this).data("id");
-        upId = id;        
+        upId = id;
+        $.ajax({
+            url: "http://dentaldiary.gearhostpreview.com/pricelist/get-price/" + id,
+            method: "get",
+            success: function (data) {
+                $("#editName").val(data.name);
+                $("#editPrice").val(data.price);
+                $("#editGroup").val(data.kindOfWork);
+            }
+        });
     });
     
     function BuildTable(data) {
        $.ajax({
            url: "http://dentaldiary.gearhostpreview.com/pricelist/bycity/" + cityId,
-       method: "GET"
+           method: "GET",
+           beforeSend: function () {
+               $("#priceList").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
+           }
    }).done(function(data) {
        var str = "";
        for(var i=0; i< data.length; i++) {

@@ -12,12 +12,21 @@ namespace DentalDiary.Controllers
     public class PriceListController : ApiController
     {
         private DiaryContext db = new DiaryContext();
+
         [Route("bycity/{id}")]
         [HttpGet]
         public IEnumerable<PriceViewModel> GetPriceList(int id)
         {
             var priceList = db.PriceList.Where(pl => pl.CityId == id);
             return Map<IEnumerable<PriceViewModel>>(priceList);
+        }
+
+        [HttpGet]
+        [Route("get-price/{id}")]
+        public PriceViewModel GetPrice(int id)
+        {
+            var price = db.PriceList.Single(p => p.Id == id);
+            return Map<PriceViewModel>(price);
         }
 
         [Route("create")]

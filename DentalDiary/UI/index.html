@@ -8,6 +8,7 @@
    <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet"> 
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -113,7 +114,14 @@
                      <div class="form-group">
                         <label class="сol-md-2 control-label">Група робіт</label>
                         <select class="selectpicker" id="namePrice" data-size="5"></select>
-                   </div>
+                     </div>
+                     <div class="form-group">
+                         <label class="сol-md-2 control-label">Пріоритет</label>
+                         <select class="selectpicker" id="priority" data-size="5">
+                             <option value="1">Стандарт</option>
+                             <option value="5">Високий</option>
+                         </select>
+                      </div>
                    <hr />
                    
                    <div class="text-center">
@@ -152,6 +160,13 @@
                         <label class="сol-md-2 control-label">Група робіт</label>
                         <select class="selectpicker" id="namePriceWU" data-size="5"></select>
                    </div>
+                           <div class="form-group">
+                               <label class="сol-md-2 control-label">Пріоритет</label>
+                               <select class="selectpicker" id="priorityW" data-size="5">
+                                   <option value="1">Стандарт</option>
+                                   <option value="5">Високий</option>
+                               </select>
+                           </div>
                        </div>                        
                    </div>
                    
@@ -165,7 +180,6 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/functions.js"></script>
     <script src="js/loadHeader.js"></script>
     <script src="js/main.js"></script>
     

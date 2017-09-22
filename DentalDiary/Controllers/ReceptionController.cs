@@ -24,9 +24,17 @@ namespace DentalDiary.Controllers
         [Route("bycity/{id}")]
         public ICollection<ReceptionViewModel> GetReceptionByCity(int id)
         {
-            var receptions = db.Receptions.Where(r => r.CityId == id).ToList();
+            var receptions = db.Receptions.Where(r => r.CityId == id).OrderByDescending(r => r.Priority).ToList();
             return Map<ICollection<ReceptionViewModel>>(receptions);
         }
+
+        [Route("reciviers/bycity/{id}")]
+        public ICollection<ReceptionViewModel> WithRecivier(int id)
+        {
+            var receptions = db.Receptions.Where(r => r.CityId == id && r.Recivier != null).ToList();
+            return Map<ICollection<ReceptionViewModel>>(receptions);
+        }
+
         [HttpGet]
         [Route("search-by-customer/{id}")]
         public ICollection<ReceptionViewModel> SortByCustomer(int id, string customer)
@@ -44,10 +52,10 @@ namespace DentalDiary.Controllers
         }
 
         [Route("sort-by-date")]
-        public ICollection<ReceptionViewModel>SortByDate(DateTime date)
+        public ICollection<ReceptionViewModel>SortByDate(DateTime date, int cityId)
         {
             var recs = new List<ReceptionDataModel>();
-            var dbR = db.Receptions.ToList();
+            var dbR = db.Receptions.Where(r => r.CityId == cityId).ToList();
             foreach(var item in dbR)
             {
                 if (item.Date.Date == date.Date)
@@ -59,7 +67,7 @@ namespace DentalDiary.Controllers
         [Route("diary/{id}")]
         public ICollection<ReceptionViewModel> GetDiary(int id)
         {
-            var receptions = db.Receptions.Where(r => r.CityId == id && r.Done == false).ToList();
+            var receptions = db.Receptions.Where(r => r.CityId == id && r.Done == false).OrderByDescending(r => r.Priority).ToList();
             return Map<ICollection<ReceptionViewModel>>(receptions);
         }
 
@@ -162,6 +170,8 @@ namespace DentalDiary.Controllers
         private ReceptionDataModel CreateRecption(ReceptionViewModel rec)
         {
             var dataRecertion = Map<ReceptionDataModel>(rec);
+            if (dataRecertion.Date.Year == 0001)
+                dataRecertion.Date = DateTime.Now;
             var price = db.PriceList.Single(p => p.Id == rec.PriceId);
             var person = db.Persons.Single(p => p.Id == rec.PersonId);
             person.LastVisit = rec.Date;

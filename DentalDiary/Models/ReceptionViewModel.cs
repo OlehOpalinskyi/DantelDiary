@@ -16,6 +16,7 @@ namespace DentalDiary.Models
         public string Recivier { get; set; }
         public double Payment { get; set; }
         public bool Done { get; set; }
+        public int Priority { get; set; }
 
         public int PersonId { get; set; }
         public int CityId { get; set; }

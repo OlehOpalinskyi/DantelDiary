@@ -10,7 +10,13 @@ body {
 .mycontrol {
     font-size: xx-large;
 }
-
+#table .fa-spin.fa-3x {
+     margin-left: 95%;
+}
+.fa-spin.fa-3x {
+    margin-left: 85%;
+    margin-top:10%;
+}
 #myInput {
   background-image: url('../img/searchicon.png');
   background-position: 10px 10px;

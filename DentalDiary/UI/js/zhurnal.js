@@ -72,7 +72,10 @@ $(function() {
             $.ajax({
                 url: "http://dentaldiary.gearhostpreview.com/receptions/search-by-customer/" + cityId,
                 method: "GET",
-                data:{customer: $(this).val()},
+                data: { customer: $(this).val() },
+                beforeSend: function () {
+                    $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
+                },
                 success: function(data) {
                     BuildTable(data);
                 }
@@ -137,9 +140,15 @@ $(function() {
              day = "0" + day;
          var dateStr = year + "-" + mounth + "-" + day;
          $.ajax({
-             url: "http://dentaldiary.gearhostpreview.com/receptions/sort-by-date?date=" + dateStr,
+             url: "http://dentaldiary.gearhostpreview.com/receptions/sort-by-date?date=" + dateStr + "&cityId=" + cityId,
              method: "post",
-             data: {date: dateStr},
+             data: {
+                 date: dateStr,
+                 cityId: cityId
+             },
+             beforeSend: function () {
+                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
+             },
              success: function(data) {
                  BuildTable(data);
              }
@@ -148,10 +157,14 @@ $(function() {
     
     function GetAll() {
         $.ajax({
-        url: "http://dentaldiary.gearhostpreview.com/receptions/diary/" + cityId,
-        method: "GET"
+            url: "http://dentaldiary.gearhostpreview.com/receptions/diary/" + cityId,
+            method: "GET",
+            beforeSend: function () {
+                $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
+            }
     }).done(function(data) {
         BuildTable(data);
+        Priority();
     });
     }
     
@@ -161,12 +174,16 @@ $(function() {
             var dateTime = new Date(data[i].date);
             var date = dateTime.toLocaleDateString();
             var time = dateTime.toLocaleTimeString();
-            str += "<tr><td>" + data[i].customer + "</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + 
+            str += "<tr data-priority='"+ data[i].priority +"'><td>" + data[i].customer + "</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + 
                 "</td><td>" + data[i].priceCount + "</td><td>" + date + "</td><td>" + time +"</td>" + 
                 '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs" data-id="'+ data[i].id+ '" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>' + 
                 '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="'+
                 data[i].id+'"><span class="glyphicon glyphicon-trash"></span></button></p></td>' + '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-success btn-xs" data-toggle="modal" data-target="#finish" data-id="'+ data[i].id + '"><span class="glyphicon glyphicon-plus"></span></button></p></td></tr>';
             }
         $("#table").html(str);
+    }
+
+    function Priority() {
+        $("tr[data-priority='5']").css("background-color", "red");
     }
 });

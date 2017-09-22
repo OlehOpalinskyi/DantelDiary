@@ -68,6 +68,10 @@
     <Compile Include="Migrations\201709131546590_deleteREcivier.Designer.cs">
       <DependentUpon>201709131546590_deleteREcivier.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709221108404_add-priority.cs" />
+    <Compile Include="Migrations\201709221108404_add-priority.Designer.cs">
+      <DependentUpon>201709221108404_add-priority.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
@@ -91,6 +95,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709131546590_deleteREcivier.resx">
       <DependentUpon>201709131546590_deleteREcivier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709221108404_add-priority.resx">
+      <DependentUpon>201709221108404_add-priority.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -35,7 +35,8 @@ $(function() {
             });
         });
         
-        $("#withUser").click(function() {
+        $("#withUser").click(function () {
+            var that = $(this);
             var cityId = localStorage.getItem("city");
             var date = $("#dateWU");
             var time = $("#timeWU");
@@ -48,21 +49,27 @@ $(function() {
                 recivier: recivier.val(),
                 personId: person,
                 cityId: cityId,
-                priceId: price
+                priceId: price,
+                priority: $("#priorityW").val()
             };
             $.ajax({
                 url: "http://dentaldiary.gearhostpreview.com/receptions/create/withuser",
                 method: "POST",
-                data: obj
+                data: obj,
+                beforeSend: function () {
+                    that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
+                }
             }).done(function(data) {
                 recivier.val("");
                 date.val("");
                 time.val("");
-                alert("Запис добавлен");
+                that.html("Add");
+                $(".btn.btn-default").click();
             })
         });
         
-        $("#sub").click(function() {
+        $("#sub").click(function () {
+            var that = $(this);
             var cityId = localStorage.getItem("city");
             var date = $("#date");
             var time = $("#time");
@@ -83,13 +90,17 @@ $(function() {
                     date: dateTime,
                     cityId: cityId,
                     priceId: price,
-                    recivier: recivier.val()
+                    recivier: recivier.val(),
+                    priority: $("#priority").val()
                 }
             };
             $.ajax({
                 url: "http://dentaldiary.gearhostpreview.com/receptions/create",
                 method: "POST",
-                data: obj
+                data: obj,
+                beforeSend: function () {
+                    that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
+                }
             }).done(function(data) {
                 name.val("");
                 tel.val("");
@@ -97,6 +108,8 @@ $(function() {
                 recivier.val("");
                 date.val("");
                 time.val("");
+                that.html("Add");
+                $(".btn.btn-default").click();
                 alert("Запис добавлено. Тепер перейдіть на сторінку 'Перегляд пацієнта' і заповніть дані про пацієнта");
             })
         });

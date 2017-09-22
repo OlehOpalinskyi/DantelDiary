@@ -124,7 +124,10 @@ $(function() {
     function BuildTable() {
         $.ajax({
             url: "http://dentaldiary.gearhostpreview.com/person/all",
-            method: "GET"
+            method: "GET",
+            beforeSend: function () {
+                $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
+            }
         }).done(function(data) {
             var count = data.length;
             $("#count").html(count);

@@ -53,8 +53,11 @@ $(function() {
     
     function GetAll() {
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/receptions/bycity/" + cityId,
-        method: "GET"
+            url: "http://dentaldiary.gearhostpreview.com/receptions/reciviers/bycity/" + cityId,
+            method: "post",
+            beforeSend: function () {
+                $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
+            }
     }).done(function(data) {
         BuildTable(data)
     });
