@@ -1,4 +1,5 @@
-$(function() {
+$(function () {
+    var baseUrl = "http://localhost:50612/";
     loadCity();
     BuildTable();
     
@@ -6,7 +7,7 @@ $(function() {
         var id = $(this).data("id");
         var that = $(this);
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/person/delete/" + id,
+            url: baseUrl + "person/delete/" + id,
             method: "DELETE"
         }).done(function(data) {
             that.closest("tr").remove();
@@ -18,7 +19,7 @@ $(function() {
             $("#id").val(id);
             idPerson = id;
             $.ajax({
-                url: "http://dentaldiary.gearhostpreview.com/person/" + id,
+                url: baseUrl + "person/" + id,
                 method: "get"
             }).done(function(data) {
                 var dob = ToDateString(data.dateOfBirth);
@@ -42,7 +43,7 @@ $(function() {
             });
         
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/person/get-receptions/" + id,
+            url: baseUrl + "person/get-receptions/" + id,
             method: "get"
         }).done(function(data) {
             var str = "";
@@ -77,7 +78,7 @@ $(function() {
             treatmentPlan: $("#treatment").val()
         };
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/person/edit/" + idPerson,
+            url: baseUrl + "person/edit/" + idPerson,
             method: "PUT",
             data: obj
         }).done(function(data) {
@@ -93,7 +94,7 @@ $(function() {
         data.append("id", $("#id").val());
         
         jQuery.ajax({
-            url: 'http://dentaldiary.gearhostpreview.com/addimages',
+            url: baseUrl + 'addimages',
             data: data,
             cache: false,
             contentType: false,
@@ -123,7 +124,7 @@ $(function() {
     
     function BuildTable() {
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/person/all",
+            url: baseUrl + "person/all",
             method: "GET",
             beforeSend: function () {
                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');

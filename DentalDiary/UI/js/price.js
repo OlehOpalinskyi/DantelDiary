@@ -1,4 +1,5 @@
-$(function() {
+$(function () {
+    var baseUrl = "http://localhost:50612/";
     loadCity();
     var cityId = localStorage.getItem("city");
     BuildTable();
@@ -14,7 +15,7 @@ $(function() {
             cityId: cityId
         };
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/pricelist/create",
+            url: baseUrl + "pricelist/create",
             method: "POST",
             data: price
         }).done(function(data) {
@@ -30,7 +31,7 @@ $(function() {
         var id = $(this).data("id");
         var that = $(this);
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/pricelist/delete/" + id,
+            url: baseUrl + "pricelist/delete/" + id,
             method: "DELETE"
         }).done(function(data) {
            that.closest("tr").remove();
@@ -47,7 +48,7 @@ $(function() {
             cityId: cityId
         };
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/pricelist/edit/" + upId,
+            url: baseUrl + "pricelist/edit/" + upId,
             method: "PUT",
             data: price,
             beforeSend: function () {
@@ -64,7 +65,7 @@ $(function() {
         var id = $(this).data("id");
         upId = id;
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/pricelist/get-price/" + id,
+            url: baseUrl + "pricelist/get-price/" + id,
             method: "get",
             success: function (data) {
                 $("#editName").val(data.name);
@@ -76,7 +77,7 @@ $(function() {
     
     function BuildTable(data) {
        $.ajax({
-           url: "http://dentaldiary.gearhostpreview.com/pricelist/bycity/" + cityId,
+           url: baseUrl + "pricelist/bycity/" + cityId,
            method: "GET",
            beforeSend: function () {
                $("#priceList").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');

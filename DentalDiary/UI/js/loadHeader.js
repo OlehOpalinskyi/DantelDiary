@@ -1,6 +1,6 @@
 function loadCity() {
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/city/all",
+            url: "http://localhost:50612/city/all",
             method: "GET"
         }).done(function(data) {
             var cities = "";

@@ -1,4 +1,5 @@
-$(function() {
+$(function () {
+    var baseUrl = "http://localhost:50612/";
     var cityId = localStorage.getItem("city");
     loadCity();
     GetAll();
@@ -7,7 +8,7 @@ $(function() {
         var id = $(this).data("id");
         var that = $(this);
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/receptions/delete/" + id,
+            url: baseUrl + "receptions/delete/" + id,
             method: "DELETE"
         }).done(function(data) {
             that.closest("tr").remove();
@@ -22,7 +23,7 @@ $(function() {
     $("#editRecivier").click(function() {
         var recivier = $("#recivier").val();
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/receptions/edit-recivier/" + id + "?recivier=" + recivier,
+            url: baseUrl + "receptions/edit-recivier/" + id + "?recivier=" + recivier,
             method: "PUT"
         }).done(function(data) {
             console.log(data);
@@ -34,7 +35,7 @@ $(function() {
     $("#myInput").keypress(function(e) {
         if(e.which == 13) {
             $.ajax({
-                url: "http://dentaldiary.gearhostpreview.com/receptions/search-by-recivier/" + cityId,
+                url: baseUrl + "receptions/search-by-recivier/" + cityId,
                 method: "GET",
                 data:{customer: $(this).val()},
                 success: function(data) {
@@ -53,7 +54,7 @@ $(function() {
     
     function GetAll() {
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/receptions/reciviers/bycity/" + cityId,
+            url: baseUrl + "receptions/reciviers/bycity/" + cityId,
             method: "post",
             beforeSend: function () {
                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');

@@ -1,4 +1,5 @@
-$(function() {
+$(function () {
+    var baseUrl = "http://localhost:50612/";
     loadCity();
     $( "#tabs" ).tabs();
     $(document).on("click", '#cities li', function() {
@@ -11,7 +12,7 @@ $(function() {
     $("#reception").click(function() {
         var cityId = localStorage.getItem("city");
         $.ajax({
-            url: "http://dentaldiary.gearhostpreview.com/pricelist/bycity/" + cityId,
+            url: baseUrl + "pricelist/bycity/" + cityId,
             method: "GET"
         }).done(function(data) {
             var str = "";
@@ -24,7 +25,7 @@ $(function() {
         
         $("#tab2").click(function() {
             $.ajax({
-                url: "http://dentaldiary.gearhostpreview.com/person/all",
+                url: baseUrl + "person/all",
                 method: "GET"
             }).done(function(data) {
                 var str = "";
@@ -53,7 +54,7 @@ $(function() {
                 priority: $("#priorityW").val()
             };
             $.ajax({
-                url: "http://dentaldiary.gearhostpreview.com/receptions/create/withuser",
+                url: baseUrl + "receptions/create/withuser",
                 method: "POST",
                 data: obj,
                 beforeSend: function () {
@@ -95,7 +96,7 @@ $(function() {
                 }
             };
             $.ajax({
-                url: "http://dentaldiary.gearhostpreview.com/receptions/create",
+                url: baseUrl + "receptions/create",
                 method: "POST",
                 data: obj,
                 beforeSend: function () {
