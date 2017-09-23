@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin;
+﻿using DentalDiary.Identity;
+using Microsoft.Owin;
 using Microsoft.Owin.Security.OAuth;
 using Owin;
 using System;
@@ -17,6 +18,7 @@ namespace DentalDiary.App_Start
             ConfigureOAuth(app);
             HttpConfiguration config = new HttpConfiguration();
             WebApiConfig.Register(config);
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);
         }
 
