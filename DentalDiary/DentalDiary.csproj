@@ -162,7 +162,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="UI\asd.html" />
@@ -204,9 +203,6 @@
     <Compile Include="Controllers\PersonController.cs" />
     <Compile Include="Controllers\PriceListController.cs" />
     <Compile Include="Controllers\ReceptionController.cs" />
-    <Compile Include="Global.asax.cs">
-      <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\Diary.cs" />
     <Compile Include="Models\Order.cs" />
