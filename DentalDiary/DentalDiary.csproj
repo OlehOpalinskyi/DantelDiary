@@ -228,6 +228,7 @@
     <Compile Include="Controllers\PriceListController.cs" />
     <Compile Include="Controllers\ReceptionController.cs" />
     <Compile Include="Identity\AuthContext.cs" />
+    <Compile Include="Identity\AuthRepository.cs" />
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\Diary.cs" />
     <Compile Include="Models\Order.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="Models\PersonViewModel.cs" />
     <Compile Include="Models\PriceViewModel.cs" />
     <Compile Include="Models\ReceptionViewModel.cs" />
+    <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
