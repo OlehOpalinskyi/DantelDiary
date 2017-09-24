@@ -1,4 +1,5 @@
 $(function () {
+    CheckToken();
     var baseUrl = "http://localhost:50612/";
     var cityId = localStorage.getItem("city");
     loadCity();
@@ -9,7 +10,10 @@ $(function () {
         var that = $(this);
         $.ajax({
             url: baseUrl + "receptions/delete/" + id,
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            }
         }).done(function(data) {
             that.closest("tr").remove();
         });
@@ -24,10 +28,14 @@ $(function () {
         var recivier = $("#recivier").val();
         $.ajax({
             url: baseUrl + "receptions/edit-recivier/" + id + "?recivier=" + recivier,
-            method: "PUT"
+            method: "PUT",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            }
         }).done(function(data) {
             console.log(data);
             BuildTable();
+            DeleteNulls();
             $("#close").click();
         });
     });
@@ -37,9 +45,13 @@ $(function () {
             $.ajax({
                 url: baseUrl + "receptions/search-by-recivier/" + cityId,
                 method: "GET",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                },
                 data:{customer: $(this).val()},
                 success: function(data) {
                     BuildTable(data);
+                    DeleteNulls();
                 }
             });
         } 
@@ -56,11 +68,15 @@ $(function () {
         $.ajax({
             url: baseUrl + "receptions/reciviers/bycity/" + cityId,
             method: "post",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
             beforeSend: function () {
                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
             }
     }).done(function(data) {
-        BuildTable(data)
+        BuildTable(data);
+        DeleteNulls();
     });
     }
     

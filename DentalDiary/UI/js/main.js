@@ -1,4 +1,5 @@
 $(function () {
+    CheckToken();
     var baseUrl = "http://localhost:50612/";
     loadCity();
     $( "#tabs" ).tabs();
@@ -13,7 +14,10 @@ $(function () {
         var cityId = localStorage.getItem("city");
         $.ajax({
             url: baseUrl + "pricelist/bycity/" + cityId,
-            method: "GET"
+            method: "GET",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            }
         }).done(function(data) {
             var str = "";
             for(var i=0; i<data.length; i++) {
@@ -26,7 +30,10 @@ $(function () {
         $("#tab2").click(function() {
             $.ajax({
                 url: baseUrl + "person/all",
-                method: "GET"
+                method: "GET",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                }
             }).done(function(data) {
                 var str = "";
                 for(var i=0; i<data.length; i++) {
@@ -56,6 +63,9 @@ $(function () {
             $.ajax({
                 url: baseUrl + "receptions/create/withuser",
                 method: "POST",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                },
                 data: obj,
                 beforeSend: function () {
                     that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
@@ -98,6 +108,9 @@ $(function () {
             $.ajax({
                 url: baseUrl + "receptions/create",
                 method: "POST",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                },
                 data: obj,
                 beforeSend: function () {
                     that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');

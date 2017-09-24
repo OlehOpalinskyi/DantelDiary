@@ -1,4 +1,5 @@
 $(function () {
+    CheckToken();
     var baseUrl = "http://localhost:50612/";
     loadCity();
     BuildTable();
@@ -8,7 +9,10 @@ $(function () {
         var that = $(this);
         $.ajax({
             url: baseUrl + "person/delete/" + id,
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            }
         }).done(function(data) {
             that.closest("tr").remove();
         });
@@ -20,7 +24,10 @@ $(function () {
             idPerson = id;
             $.ajax({
                 url: baseUrl + "person/" + id,
-                method: "get"
+                method: "get",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                }
             }).done(function(data) {
                 var dob = ToDateString(data.dateOfBirth);
                 var fVisit = ToDateString(data.firstVisit);
@@ -44,7 +51,10 @@ $(function () {
         
         $.ajax({
             url: baseUrl + "person/get-receptions/" + id,
-            method: "get"
+            method: "get",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            }
         }).done(function(data) {
             var str = "";
             for(var i=0; i<data.length; i++) {
@@ -80,6 +90,9 @@ $(function () {
         $.ajax({
             url: baseUrl + "person/edit/" + idPerson,
             method: "PUT",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
             data: obj
         }).done(function(data) {
             alert("Зміни збережено");
@@ -100,6 +113,9 @@ $(function () {
             contentType: false,
             processData: false,
             type: 'POST',
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
             success: function(data){
                 $("#galary").attr("href", data);
                 alert("Зображення завантажено");
@@ -126,6 +142,9 @@ $(function () {
         $.ajax({
             url: baseUrl + "person/all",
             method: "GET",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
             beforeSend: function () {
                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
             }
@@ -136,6 +155,7 @@ $(function () {
             for(var i=0; i<count; i++) {
                 str += "<tr><td>" + data[i].fullName + "</td><td>" + data[i].address + "</td><td>" + data[i].email + "</td><td>" + data[i].phoneNumber + '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="'+ data[i].id + '"><span class="glyphicon glyphicon-trash"></span></button></p></td>' + '<td><button data-toggle="modal" data-target="#pacient" type="button" class="btn-info" data-id="'+ data[i].id + '">Карточка</button></td></tr>';
                 $("#table").html(str);
+                DeleteNulls();
             }
         });
     }

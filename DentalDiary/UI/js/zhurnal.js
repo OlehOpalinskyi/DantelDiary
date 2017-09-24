@@ -1,4 +1,5 @@
 $(function () {
+    CheckToken();
     var baseUrl = "http://localhost:50612/";
    loadCity();
    var cityId = localStorage.getItem("city");
@@ -6,7 +7,10 @@ $(function () {
     GetAll();
     $.ajax({
         url: baseUrl + "pricelist/bycity/" + cityId,
-            method: "GET"
+        method: "GET",
+        headers: {
+            Authorization: JSON.parse(localStorage.token).token
+        }
         }).done(function(data) {
             var str = "";
             for(var i=0; i<data.length; i++) {
@@ -18,7 +22,10 @@ $(function () {
     
     $.ajax({
         url: baseUrl + "person/all",
-                method: "GET"
+        method: "GET",
+        headers: {
+        Authorization: JSON.parse(localStorage.token).token
+    }
             }).done(function(data) {
                 var str = "";
                 for(var i=0; i<data.length; i++) {
@@ -39,7 +46,10 @@ $(function () {
         if(priceTwo == "") {
             $.ajax({
                 url: baseUrl + "receptions/pay/" + orderId + "/" + priceOne,
-                method: "GET"
+                method: "GET",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                }
             }).done(function(data) {
                 $("#pay1").val("");
                 $(".close").eq(1).click();
@@ -58,6 +68,9 @@ $(function () {
             $.ajax({
                 url: baseUrl + "receptions/pay/withorder",
                 method: "POST",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                },
                 data: obj
             }).done(function(data) {
                 $("#pay1").val("");
@@ -73,12 +86,16 @@ $(function () {
             $.ajax({
                 url: baseUrl + "receptions/search-by-customer/" + cityId,
                 method: "GET",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                },
                 data: { customer: $(this).val() },
                 beforeSend: function () {
                     $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
                 },
                 success: function(data) {
                     BuildTable(data);
+                    DeleteNulls();
                 }
             });
         } 
@@ -108,6 +125,9 @@ $(function () {
         $.ajax({
             url: baseUrl + "receptions/edit-diary/" + orderId,
             method: "PUT",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
             data: obj
         }).done(function(data) {
             console.log(data);
@@ -124,7 +144,10 @@ $(function () {
         console.log(id);
         $.ajax({
             url: baseUrl + "receptions/delete/" + id,
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            }
         }).done(function(data) {
             that.closest("tr").remove();
         });
@@ -143,6 +166,9 @@ $(function () {
          $.ajax({
              url: baseUrl + "receptions/sort-by-date?date=" + dateStr + "&cityId=" + cityId,
              method: "post",
+             headers: {
+                 Authorization: JSON.parse(localStorage.token).token
+             },
              data: {
                  date: dateStr,
                  cityId: cityId
@@ -152,6 +178,7 @@ $(function () {
              },
              success: function(data) {
                  BuildTable(data);
+                 DeleteNulls();
              }
          })
     });
@@ -160,11 +187,15 @@ $(function () {
         $.ajax({
             url: baseUrl + "receptions/diary/" + cityId,
             method: "GET",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
             beforeSend: function () {
                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
             }
     }).done(function(data) {
         BuildTable(data);
+        DeleteNulls();
         Priority();
     });
     }

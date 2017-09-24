@@ -1,7 +1,10 @@
 function loadCity() {
         $.ajax({
             url: "http://localhost:50612/city/all",
-            method: "GET"
+            method: "GET",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            }
         }).done(function(data) {
             var cities = "";
             for(var i=0; i<data.length; i++) {
@@ -17,4 +20,19 @@ function loadCity() {
                $("[data-id='"+ id +"']").parent().addClass('active');
            }
         });
+}
+
+function CheckToken() {
+    var currDate = new Date().valueOf();
+    if (!window.localStorage.token || JSON.parse(localStorage.token).expire < currDate) {
+        localStorage.removeItem("token");
+        window.location.replace("auth.html");
     }
+}
+
+function DeleteNulls() {
+    $("#table tr td").map(function (index, item) {
+        if ($(item).text() == "null")
+            $(item).text("");
+    });
+}
