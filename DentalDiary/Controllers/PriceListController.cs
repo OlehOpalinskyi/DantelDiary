@@ -9,6 +9,7 @@ using DentalDiary.Data.Models;
 namespace DentalDiary.Controllers
 {
     [RoutePrefix("pricelist")]
+    [Authorize]
     public class PriceListController : ApiController
     {
         private DiaryContext db = new DiaryContext();

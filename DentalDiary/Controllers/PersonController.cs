@@ -12,6 +12,7 @@ using static AutoMapper.Mapper;
 namespace DentalDiary.Controllers
 {
     [RoutePrefix("person")]
+    [Authorize]
     public class PersonController : ApiController
     {
         private DiaryContext db = new DiaryContext();

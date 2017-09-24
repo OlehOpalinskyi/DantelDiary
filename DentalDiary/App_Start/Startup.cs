@@ -17,6 +17,7 @@ namespace DentalDiary.App_Start
         {
             ConfigureOAuth(app);
             HttpConfiguration config = new HttpConfiguration();
+            SwaggerConfig.Register(config);
             WebApiConfig.Register(config);
             app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             app.UseWebApi(config);

@@ -13,6 +13,7 @@ using System.Web.Http;
 
 namespace DentalDiary.Controllers
 {
+    [Authorize]
     public class DropBoxController : ApiController
     {
         DiaryContext db = new DiaryContext();
