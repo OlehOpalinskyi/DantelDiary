@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://herychok-001-site1.etempurl.com/";
+    var baseUrl = "http://stomat.pp.ua/";
     loadCity();
     $( "#tabs" ).tabs();
     $(document).on("click", '#cities li', function() {
@@ -17,7 +17,10 @@ $(function () {
             method: "GET",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
-            }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
         }).done(function(data) {
             var str = "";
             for(var i=0; i<data.length; i++) {
@@ -33,6 +36,9 @@ $(function () {
                 method: "GET",
                 headers: {
                     Authorization: JSON.parse(localStorage.token).token
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    Unauthorized(errorThrown);
                 }
             }).done(function(data) {
                 var str = "";
@@ -65,6 +71,9 @@ $(function () {
                 method: "POST",
                 headers: {
                     Authorization: JSON.parse(localStorage.token).token
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    Unauthorized(errorThrown);
                 },
                 data: obj,
                 beforeSend: function () {
@@ -110,6 +119,9 @@ $(function () {
                 method: "POST",
                 headers: {
                     Authorization: JSON.parse(localStorage.token).token
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    Unauthorized(errorThrown);
                 },
                 data: obj,
                 beforeSend: function () {

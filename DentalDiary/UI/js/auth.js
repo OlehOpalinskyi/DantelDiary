@@ -4,7 +4,7 @@
         var password = $("input[name='pass']");
 
         $.ajax({
-            url: "http://herychok-001-site1.etempurl.com/token",
+            url: "http://stomat.pp.ua/token",
             method: "post",
             data: {
                 grant_type: "password",

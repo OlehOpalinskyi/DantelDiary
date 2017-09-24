@@ -1,6 +1,6 @@
 function loadCity() {
         $.ajax({
-            url: "http://herychok-001-site1.etempurl.com/city/all",
+            url: "http://stomat.pp.ua/city/all",
             method: "GET",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
@@ -35,4 +35,11 @@ function DeleteNulls() {
         if ($(item).text() == "null")
             $(item).text("");
     });
+}
+
+function Unauthorized(err) {
+    if (err == "Unauthorized") {
+        localStorage.removeItem("token");
+        location.reload();
+    }
 }

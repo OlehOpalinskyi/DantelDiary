@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://herychok-001-site1.etempurl.com/";
+    var baseUrl = "http://stomat.pp.ua/";
     loadCity();
     var cityId = localStorage.getItem("city");
     BuildTable();
@@ -21,6 +21,9 @@ $(function () {
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
             },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
             data: price
         }).done(function(data) {
             nameP.val("");
@@ -39,7 +42,10 @@ $(function () {
             method: "DELETE",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
-            }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+            Unauthorized(errorThrown);
+        },
         }).done(function(data) {
            that.closest("tr").remove();
         });
@@ -61,6 +67,9 @@ $(function () {
                 Authorization: JSON.parse(localStorage.token).token
             },
             data: price,
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
             beforeSend: function () {
                 that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>')
             }
@@ -80,6 +89,9 @@ $(function () {
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
             },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
             success: function (data) {
                 $("#editName").val(data.name);
                 $("#editPrice").val(data.price);
@@ -94,6 +106,9 @@ $(function () {
             method: "GET",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
             },
             beforeSend: function () {
                 $("#priceList").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');

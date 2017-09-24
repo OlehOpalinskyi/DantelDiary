@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://herychok-001-site1.etempurl.com/";
+    var baseUrl = "http://stomat.pp.ua/";
     loadCity();
     BuildTable();
     
@@ -12,7 +12,10 @@ $(function () {
             method: "DELETE",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
-            }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
         }).done(function(data) {
             that.closest("tr").remove();
         });
@@ -27,6 +30,9 @@ $(function () {
                 method: "get",
                 headers: {
                     Authorization: JSON.parse(localStorage.token).token
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    Unauthorized(errorThrown);
                 }
             }).done(function(data) {
                 var dob = ToDateString(data.dateOfBirth);
@@ -54,6 +60,9 @@ $(function () {
             method: "get",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
             }
         }).done(function(data) {
             var str = "";
@@ -93,6 +102,9 @@ $(function () {
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
             },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
             data: obj
         }).done(function(data) {
             alert("Зміни збережено");
@@ -115,6 +127,9 @@ $(function () {
             type: 'POST',
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
             },
             success: function(data){
                 $("#galary").attr("href", data);
@@ -144,6 +159,9 @@ $(function () {
             method: "GET",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
             },
             beforeSend: function () {
                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
