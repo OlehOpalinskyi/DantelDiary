@@ -192,8 +192,9 @@
   <ItemGroup>
     <Content Include="scripts\ai.0.22.9-build00167.js" />
     <Content Include="scripts\ai.0.22.9-build00167.min.js" />
-    <Content Include="UI\asd.html" />
+    <Content Include="UI\auth.html" />
     <Content Include="UI\by.html" />
+    <Content Include="UI\css\auth.css" />
     <Content Include="UI\css\bootstrap-datetimepicker.min.css" />
     <Content Include="UI\css\bootstrap-theme.css" />
     <Content Include="UI\css\bootstrap.css" />
@@ -207,6 +208,7 @@
     <Content Include="UI\img\foto-3.jpg" />
     <Content Include="UI\img\searchicon.png" />
     <Content Include="UI\index.html" />
+    <Content Include="UI\js\auth.js" />
     <Content Include="UI\js\bootstrap-datetimepicker.js" />
     <Content Include="UI\js\bootstrap-datetimepicker.uk.js" />
     <Content Include="UI\js\bootstrap.js" />
