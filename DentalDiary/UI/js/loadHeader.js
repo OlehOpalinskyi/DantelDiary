@@ -1,6 +1,6 @@
 function loadCity() {
         $.ajax({
-            url: "http://localhost:50612/city/all",
+            url: "http://herychok-001-site1.etempurl.com/city/all",
             method: "GET",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token

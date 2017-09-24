@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://localhost:50612/";
+    var baseUrl = "http://herychok-001-site1.etempurl.com/";
     loadCity();
     BuildTable();
     
