@@ -24,6 +24,15 @@ namespace DentalDiary.Controllers
             var persons = db.Persons.ToList();
             return Map<ICollection<PersonViewModel>>(persons);
         }
+
+        [Route("search")]
+        [HttpGet]
+        public ICollection<PersonViewModel> SearchPerson(string person)
+        {
+            var persons = db.Persons.Where(p => p.FullName.Contains(person)).ToList();
+            return Map<ICollection<PersonViewModel>>(persons);
+        }
+
         [Route("{id}")]
         [HttpGet]
         public PersonViewModel GetPerson(int id)

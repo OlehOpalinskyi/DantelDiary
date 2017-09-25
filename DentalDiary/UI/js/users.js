@@ -76,6 +76,36 @@ $(function () {
         
         });
     
+    $("#myInput").keypress(function (e) {
+        if (e.which == 13) {
+            $.ajax({
+                url: baseUrl + "person/search",
+                method: "GET",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                },
+                data: { person: $(this).val() },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    Unauthorized(errorThrown);
+                },
+                beforeSend: function () {
+                    $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
+                },
+                success: function (data) {
+                    BuildTable(data);
+                    DeleteNulls();
+                }
+            });
+        }
+    });
+
+    $("#myInput").keyup(function (e) {
+        if (e.keyCode == 27) {
+            $(this).val("");
+            BuildTable();
+        }
+    });
+
     $("#save").click(function() {
         var dob = $("#dob").val();
         var fv = $("#fVisit").val();
