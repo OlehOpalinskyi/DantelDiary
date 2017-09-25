@@ -21,7 +21,7 @@ namespace DentalDiary.Controllers
         [HttpGet]
         public ICollection<PersonViewModel> GetPersons()
         {
-            var persons = db.Persons.ToList();
+            var persons = db.Persons.OrderBy(p => p.FullName).ToList();
             return Map<ICollection<PersonViewModel>>(persons);
         }
 
