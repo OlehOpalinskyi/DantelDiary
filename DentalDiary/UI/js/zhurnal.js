@@ -233,7 +233,13 @@ $(function () {
             var dateTime = new Date(data[i].date);
             var date = dateTime.toLocaleDateString();
             var time = dateTime.toLocaleTimeString();
-            str += "<tr data-priority='"+ data[i].priority +"'><td>" + data[i].customer + "</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + 
+            if (data[i].recomended == true) {
+                str += "<tr class='recomend' data-priority='";
+            }
+            else
+                str += "<tr data-priority='";
+
+            str += data[i].priority +"'><td>" + data[i].customer + "</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + 
                 "</td><td>" + data[i].priceCount + "</td><td>" + date + "</td><td>" + time +"</td>" + 
                 '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs" data-id="'+ data[i].id+ '" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>' + 
                 '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="'+

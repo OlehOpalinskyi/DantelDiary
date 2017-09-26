@@ -49,7 +49,7 @@ namespace DentalDiary.Controllers
         public ICollection<ReceptionViewModel>SortByDate(DateTime date, int cityId)
         {
             var recs = new List<ReceptionDataModel>();
-            var dbR = db.Receptions.Where(r => r.CityId == cityId && r.Recomended == false && r.Done == false).ToList();
+            var dbR = db.Receptions.Where(r => r.CityId == cityId && r.Done == false).ToList();
             foreach(var item in dbR)
             {
                 if (item.Date.Value.Date == date.Date)
@@ -70,6 +70,17 @@ namespace DentalDiary.Controllers
         public ReceptionViewModel AddReception(ReceptionViewModel rec)
         {
             var dataReception = CreateRecption(rec);
+            db.Receptions.Add(dataReception);
+            db.SaveChanges();
+            return Map<ReceptionViewModel>(dataReception);
+        }
+
+        [HttpPost]
+        [Route("create-recomedation")]
+        public ReceptionViewModel CreateRecomendation(ReceptionViewModel rec)
+        {
+            var dataReception = CreateRecption(rec);
+            db.Persons.Single(p => p.Id == rec.PersonId).RecomendDate = rec.Date;
             db.Receptions.Add(dataReception);
             db.SaveChanges();
             return Map<ReceptionViewModel>(dataReception);
@@ -164,13 +175,17 @@ namespace DentalDiary.Controllers
         private ReceptionDataModel CreateRecption(ReceptionViewModel rec)
         {
             var dataRecertion = Map<ReceptionDataModel>(rec);
-            var price = db.PriceList.Single(p => p.Id == rec.PriceId);
+            if(rec.PriceId != 0)
+            {
+                var price = db.PriceList.Single(p => p.Id == rec.PriceId);
+                dataRecertion.Price = price;
+            }
+                
             var person = db.Persons.Single(p => p.Id == rec.PersonId);
             person.LastVisit = rec.Date;
             var city = db.Cities.Single(c => c.Id == rec.CityId);
             dataRecertion.Preson = person;
             dataRecertion.City = city;
-            dataRecertion.Price = price;
 
             return dataRecertion;
         }

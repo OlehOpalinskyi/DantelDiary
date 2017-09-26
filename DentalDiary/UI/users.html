@@ -106,17 +106,19 @@
                      <input type="number" id="debt">
                      </div>
                 </div>
-                    <hr />
-                <div class="row">
-                    <label for="dtp_input2" class="сol-md-2 control-label">Дата запису</label>
-                    <div class="input-group date form_date col-md-10" data-date="" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
-                        <input class="form-control" size="16" type="text" id="recomendDate" value="" readonly>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
-                    </div>
-                </div>
                 <hr />
                 <button type="button" class="btn btn-primary" id="save">Зберегти</button>
+                    <hr>
+                    <div class="row">
+                        <label for="dtp_input2" class="сol-md-2 control-label">Рекомендована дата </label>
+                        <div class="input-group date form_date col-md-10" data-date-format="yyyy-mm-dd" data-link-format="yyyy-mm-dd">
+                            <input class="form-control" size="16" type="text" id="recomendDate" value="" readonly>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                        <select class="selectpicker" id="price" data-size="5"></select>
+                        <button type="button" class="btn btn-primary" id="addDate">Зберегти</button>
+                    </div>
             </h4>
             </div>
             

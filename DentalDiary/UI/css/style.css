@@ -49,3 +49,16 @@ body {
 input[name='add'] {
     float:right;
 }
+.recomend {
+    background-color:orangered;
+}
+#table .debt {
+    background-color:red;
+}
+#price {
+    margin-top:20px;
+}
+#addDate {
+    margin-top: 15px;
+    margin-left: 40%;
+}

@@ -3,7 +3,7 @@ $(function () {
     var baseUrl = "http://localhost:50612/";
     loadCity();
     GetAll();
-    
+
     var cityId = localStorage.getItem("city");
     $.ajax({
         url: baseUrl + "pricelist/bycity/" + cityId,
@@ -20,9 +20,10 @@ $(function () {
             str += '<option value="' + data[i].id + '">' + data[i].name + "</option>";
         }
         $("#priceList").html(str);
+        $("#price").html(str);
     });
 
-    $(document).on("click", ".btn-danger.btn-xs", function() {
+    $(document).on("click", ".btn-danger.btn-xs", function () {
         var id = $(this).data("id");
         var that = $(this);
         $.ajax({
@@ -34,46 +35,50 @@ $(function () {
             error: function (jqXHR, textStatus, errorThrown) {
                 Unauthorized(errorThrown);
             },
-        }).done(function(data) {
+        }).done(function (data) {
             that.closest("tr").remove();
         });
     });
     var idPerson;
-    $(document).on("click", ".btn-info", function() {
+    $(document).on("click", ".btn-info", function () {
         var id = $(this).data("id");
         $("#order").data("id", id);
-            $("#id").val(id);
-            idPerson = id;
-            $.ajax({
-                url: baseUrl + "person/" + id,
-                method: "get",
-                headers: {
-                    Authorization: JSON.parse(localStorage.token).token
-                },
-                error: function (jqXHR, textStatus, errorThrown) {
-                    Unauthorized(errorThrown);
-                }
-            }).done(function(data) {
-                var dob = ToDateString(data.dateOfBirth);
-                var fVisit = ToDateString(data.firstVisit);
-                var lVisit = ToDateString(data.lastVisit);
-                $("#name").val(data.fullName);
-                $("#phone").val(data.phoneNumber);
-                $("#email").val(data.email);
-                $("#address").val(data.address);
-                $("#dob").val(dob);
-                $("#fVisit").val(fVisit);
-                $("#lVisit").val(lVisit);
-                $("#debt").val(data.debt);
-                $("#complaints").val(data.complaints);
-                $("#lastTreatment").val(data.lastTreatment);
-                $("#lastDiagnosis").val(data.lastDiagnosis);
-                $("#finishDiagnosis").val(data.finalDiagnosis);
-                $("#advice").val(data.anotherOpinion);
-                $("#treatment").val(data.treatmentPlan);
-                $("#galary").attr("href", data.linkToImages);
-            });
-        
+        $("#addDate").data("id", id);
+        $("#id").val(id);
+        idPerson = id;
+        $.ajax({
+            url: baseUrl + "person/" + id,
+            method: "get",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            }
+        }).done(function (data) {
+            console.log(data);
+            var dob = ToDateString(data.dateOfBirth);
+            var fVisit = ToDateString(data.firstVisit);
+            var lVisit = ToDateString(data.lastVisit);
+            var recomendDate = ToDateString(data.recomendDate);
+            $("#name").val(data.fullName);
+            $("#phone").val(data.phoneNumber);
+            $("#email").val(data.email);
+            $("#address").val(data.address);
+            $("#dob").val(dob);
+            $("#fVisit").val(fVisit);
+            $("#lVisit").val(lVisit);
+            $("#debt").val(data.debt);
+            $("#complaints").val(data.complaints);
+            $("#lastTreatment").val(data.lastTreatment);
+            $("#lastDiagnosis").val(data.lastDiagnosis);
+            $("#finishDiagnosis").val(data.finalDiagnosis);
+            $("#advice").val(data.anotherOpinion);
+            $("#treatment").val(data.treatmentPlan);
+            // $("#recomendDate").val(recomendDate);
+            $("#galary").attr("href", data.linkToImages);
+        });
+
         $.ajax({
             url: baseUrl + "person/get-receptions/" + id,
             method: "get",
@@ -83,18 +88,18 @@ $(function () {
             error: function (jqXHR, textStatus, errorThrown) {
                 Unauthorized(errorThrown);
             }
-        }).done(function(data) {
+        }).done(function (data) {
             var str = "";
-            for(var i=0; i<data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
                 var date = new Date(data[i].date).toLocaleDateString();
-                str += "<tr><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" + 
+                str += "<tr><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" +
                     data[i].payment + "</td><td>" + date + "</td></tr>";
             }
             $("#tableUser").html(str);
         });
-        
-        });
-    
+
+    });
+
     $("#createRec").click(function () {
         var id = $("#order").data("id");
         var that = $(this);
@@ -135,6 +140,33 @@ $(function () {
         });
     });
 
+    $("#addDate").click(function () {
+        var id = $(this).data("id");
+        var price = $("#price").val();
+        var date = $("#recomendDate").val();
+        var obj = {
+            date: date,
+            personId: id,
+            recomended: true,
+            cityId: cityId,
+            priority: 1,
+            priceId: price
+        }
+        $.ajax({
+            url: baseUrl + "receptions/create-recomedation",
+            method: "POST",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
+            data: obj
+        }).done(function (data) {
+            console.log(data);
+        });
+    });
+
     $("#myInput").keypress(function (e) {
         if (e.which == 13) {
             $.ajax({
@@ -165,7 +197,7 @@ $(function () {
         }
     });
 
-    $("#save").click(function() {
+    $("#save").click(function () {
         var dob = $("#dob").val();
         var fv = $("#fVisit").val();
         var lv = $("#lVisit").val();
@@ -195,18 +227,18 @@ $(function () {
                 Unauthorized(errorThrown);
             },
             data: obj
-        }).done(function(data) {
+        }).done(function (data) {
             alert("Зміни збережено");
         });
     });
-    
-    $("#sendImg").click(function() {
+
+    $("#sendImg").click(function () {
         var data = new FormData();
-        jQuery.each(jQuery('#img')[0].files, function(i, file) {
-            data.append('file-'+i, file);
+        jQuery.each(jQuery('#img')[0].files, function (i, file) {
+            data.append('file-' + i, file);
         });
         data.append("id", $("#id").val());
-        
+
         jQuery.ajax({
             url: baseUrl + 'addimages',
             data: data,
@@ -220,13 +252,13 @@ $(function () {
             error: function (jqXHR, textStatus, errorThrown) {
                 Unauthorized(errorThrown);
             },
-            success: function(data){
+            success: function (data) {
                 $("#galary").attr("href", data);
                 alert("Зображення завантажено");
             }
         });
     });
-    
+
     $("#addPacient").click(function () {
         var that = $(this);
         var name = $("#add #name");
@@ -275,18 +307,18 @@ $(function () {
     function ToDateString(value) {
         var date = new Date(value);
         var dateString = date.getFullYear() + "-";
-        if(date.getMonth() < 10) {
-            dateString += "0"+ date.getMonth() + "-";
+        if (date.getMonth() < 10) {
+            dateString += "0" + date.getMonth() + "-";
         }
         else
             dateString += date.getMonth() + "-";
-        if(date.getDate() < 10)
+        if (date.getDate() < 10)
             dateString += "0" + date.getDate();
         else
             dateString += date.getDate();
         return dateString;
     }
-    
+
     function GetAll() {
         $.ajax({
             url: baseUrl + "person/all",
@@ -300,7 +332,7 @@ $(function () {
             beforeSend: function () {
                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
             }
-        }).done(function(data) {
+        }).done(function (data) {
             BuildTable(data);
         });
     }
@@ -310,9 +342,18 @@ $(function () {
         $("#count").html(count);
         var str = "";
         for (var i = 0; i < count; i++) {
-            str += "<tr><td>" + data[i].fullName + "</td><td>" + data[i].address + "</td><td>" + data[i].email + "</td><td>" + data[i].phoneNumber + '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="' + data[i].id + '"><span class="glyphicon glyphicon-trash"></span></button></p></td>' + '<td><button data-toggle="modal" data-target="#pacient" type="button" class="btn-info" data-id="' + data[i].id + '">Карточка</button></td></tr>';
+            if (data[i].debt < 0) {
+                str += "<tr class='debt'><td>";
+            }
+            else
+                str += "<tr><td>";
+
+            str += data[i].fullName + "</td><td>" + data[i].address + "</td><td>" + data[i].email + "</td><td>" + data[i].phoneNumber +
+                '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="' + data[i].id +
+                '"><span class="glyphicon glyphicon-trash"></span></button></p></td>' + '<td><button data-toggle="modal" data-target="#pacient" type="button" class="btn-info" data-id="' +
+                data[i].id + '">Карточка</button></td></tr>';
             $("#table").html(str);
             DeleteNulls();
         }
     }
-})
+});
