@@ -12,7 +12,7 @@ namespace DentalDiary.Data.Models
     {
         [Key]
         public int Id { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         public string Recivier { get; set; }
         public double Payment { get; set; }
         public bool Done { get; set; }

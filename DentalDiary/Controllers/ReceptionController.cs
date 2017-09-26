@@ -59,7 +59,7 @@ namespace DentalDiary.Controllers
             var dbR = db.Receptions.Where(r => r.CityId == cityId).ToList();
             foreach(var item in dbR)
             {
-                if (item.Date.Date == date.Date)
+                if (item.Date.Value.Date == date.Date)
                     recs.Add(item);
             }
             return Map<ICollection<ReceptionViewModel>>(recs);
@@ -171,7 +171,7 @@ namespace DentalDiary.Controllers
         private ReceptionDataModel CreateRecption(ReceptionViewModel rec)
         {
             var dataRecertion = Map<ReceptionDataModel>(rec);
-            if (dataRecertion.Date.Year == 0001)
+            if (dataRecertion.Date.Value.Year == 0001)
                 dataRecertion.Date = DateTime.Now;
             var price = db.PriceList.Single(p => p.Id == rec.PriceId);
             var person = db.Persons.Single(p => p.Id == rec.PersonId);

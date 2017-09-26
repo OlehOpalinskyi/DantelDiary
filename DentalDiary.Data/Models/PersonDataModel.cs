@@ -19,11 +19,12 @@ namespace DentalDiary.Data.Models
         public string Address { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime FirstVisit { get; set; }
-        public DateTime LastVisit { get; set; }
+        public DateTime? FirstVisit { get; set; }
+        public DateTime? LastVisit { get; set; }
         public string LinkToImages { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public double Debt { get; set; }
+        public DateTime? RecomendDate { get; set; }
 
         [StringLength(100)]
         public string Complaints { get; set; }

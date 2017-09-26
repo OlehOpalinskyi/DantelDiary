@@ -46,6 +46,7 @@ $(function () {
                      str+= '<option value="'+ data[i].id +'">' + data[i].fullName + "</option>"
                 }
                 $("#users").html(str);
+                console.log(data);
             });
         });
         

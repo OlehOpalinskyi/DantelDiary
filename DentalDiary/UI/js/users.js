@@ -2,7 +2,7 @@ $(function () {
     CheckToken();
     var baseUrl = "http://stomat.pp.ua/";
     loadCity();
-    BuildTable();
+    GetAll();
     
     $(document).on("click", ".btn-danger.btn-xs", function() {
         var id = $(this).data("id");
@@ -102,7 +102,7 @@ $(function () {
     $("#myInput").keyup(function (e) {
         if (e.keyCode == 27) {
             $(this).val("");
-            BuildTable();
+            GetAll();
         }
     });
 
@@ -183,7 +183,7 @@ $(function () {
         return dateString;
     }
     
-    function BuildTable() {
+    function GetAll() {
         $.ajax({
             url: baseUrl + "person/all",
             method: "GET",
@@ -197,14 +197,18 @@ $(function () {
                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
             }
         }).done(function(data) {
-            var count = data.length;
-            $("#count").html(count);
-            var str = "";
-            for(var i=0; i<count; i++) {
-                str += "<tr><td>" + data[i].fullName + "</td><td>" + data[i].address + "</td><td>" + data[i].email + "</td><td>" + data[i].phoneNumber + '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="'+ data[i].id + '"><span class="glyphicon glyphicon-trash"></span></button></p></td>' + '<td><button data-toggle="modal" data-target="#pacient" type="button" class="btn-info" data-id="'+ data[i].id + '">Карточка</button></td></tr>';
-                $("#table").html(str);
-                DeleteNulls();
-            }
+            BuildTable(data);
         });
+    }
+
+    function BuildTable(data) {
+        var count = data.length;
+        $("#count").html(count);
+        var str = "";
+        for (var i = 0; i < count; i++) {
+            str += "<tr><td>" + data[i].fullName + "</td><td>" + data[i].address + "</td><td>" + data[i].email + "</td><td>" + data[i].phoneNumber + '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="' + data[i].id + '"><span class="glyphicon glyphicon-trash"></span></button></p></td>' + '<td><button data-toggle="modal" data-target="#pacient" type="button" class="btn-info" data-id="' + data[i].id + '">Карточка</button></td></tr>';
+            $("#table").html(str);
+            DeleteNulls();
+        }
     }
 })

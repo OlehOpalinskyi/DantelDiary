@@ -18,7 +18,7 @@ namespace DentalDiary.Controllers
         [HttpGet]
         public IEnumerable<PriceViewModel> GetPriceList(int id)
         {
-            var priceList = db.PriceList.Where(pl => pl.CityId == id);
+            var priceList = db.PriceList.Where(pl => pl.CityId == id).OrderBy(p => p.Name);
             return Map<IEnumerable<PriceViewModel>>(priceList);
         }
 

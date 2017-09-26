@@ -72,6 +72,10 @@
     <Compile Include="Migrations\201709221108404_add-priority.Designer.cs">
       <DependentUpon>201709221108404_add-priority.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709260954453_addColunmRecomendate.cs" />
+    <Compile Include="Migrations\201709260954453_addColunmRecomendate.Designer.cs">
+      <DependentUpon>201709260954453_addColunmRecomendate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
@@ -98,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709221108404_add-priority.resx">
       <DependentUpon>201709221108404_add-priority.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709260954453_addColunmRecomendate.resx">
+      <DependentUpon>201709260954453_addColunmRecomendate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

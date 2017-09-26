@@ -9,7 +9,7 @@ namespace DentalDiary.Models
     {
         public int Id { get; set; }
         public string Customer { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         public string PriceName { get; set; }
         public string KindOfWork { get; set; }
         public double PriceCount { get; set; }
