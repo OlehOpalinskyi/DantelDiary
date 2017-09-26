@@ -15,13 +15,6 @@ namespace DentalDiary.Controllers
     {
         private DiaryContext db = new DiaryContext();
 
-        [Route("all")]
-        public ICollection<ReceptionViewModel> GetAllReception()
-        {
-            var receptions = db.Receptions.ToList();
-            return Map<ICollection<ReceptionViewModel>>(receptions);
-        }
-
         [Route("bycity/{id}")]
         public ICollection<ReceptionViewModel> GetReceptionByCity(int id)
         {
@@ -40,7 +33,7 @@ namespace DentalDiary.Controllers
         [Route("search-by-customer/{id}")]
         public ICollection<ReceptionViewModel> SortByCustomer(int id, string customer)
         {
-            var rec = db.Receptions.Where(r => r.CityId == id && r.Preson.FullName.Contains(customer)).ToList();
+            var rec = db.Receptions.Where(r => r.CityId == id && r.Preson.FullName.Contains(customer) && r.Done == false).ToList();
             return Map<ICollection<ReceptionViewModel>>(rec);
         }
 
@@ -56,7 +49,7 @@ namespace DentalDiary.Controllers
         public ICollection<ReceptionViewModel>SortByDate(DateTime date, int cityId)
         {
             var recs = new List<ReceptionDataModel>();
-            var dbR = db.Receptions.Where(r => r.CityId == cityId).ToList();
+            var dbR = db.Receptions.Where(r => r.CityId == cityId && r.Recomended == false && r.Done == false).ToList();
             foreach(var item in dbR)
             {
                 if (item.Date.Value.Date == date.Date)
@@ -171,8 +164,6 @@ namespace DentalDiary.Controllers
         private ReceptionDataModel CreateRecption(ReceptionViewModel rec)
         {
             var dataRecertion = Map<ReceptionDataModel>(rec);
-            if (dataRecertion.Date.Value.Year == 0001)
-                dataRecertion.Date = DateTime.Now;
             var price = db.PriceList.Single(p => p.Id == rec.PriceId);
             var person = db.Persons.Single(p => p.Id == rec.PersonId);
             person.LastVisit = rec.Date;

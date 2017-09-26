@@ -1,6 +1,6 @@
 function loadCity() {
         $.ajax({
-            url: "http://stomat.pp.ua/city/all",
+            url: "http://localhost:50612/city/all",
             method: "GET",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token

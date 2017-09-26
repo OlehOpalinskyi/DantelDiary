@@ -76,6 +76,10 @@
     <Compile Include="Migrations\201709260954453_addColunmRecomendate.Designer.cs">
       <DependentUpon>201709260954453_addColunmRecomendate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709261348039_addRecomendedColumn.cs" />
+    <Compile Include="Migrations\201709261348039_addRecomendedColumn.Designer.cs">
+      <DependentUpon>201709261348039_addRecomendedColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
@@ -105,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709260954453_addColunmRecomendate.resx">
       <DependentUpon>201709260954453_addColunmRecomendate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709261348039_addRecomendedColumn.resx">
+      <DependentUpon>201709261348039_addRecomendedColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

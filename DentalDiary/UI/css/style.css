@@ -46,3 +46,6 @@ body {
 #save {
     margin-left: 40%;
 }
+input[name='add'] {
+    float:right;
+}
