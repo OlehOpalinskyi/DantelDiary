@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://localhost:50612/";
+    var baseUrl = "http://stomat.pp.ua/";
     loadCity();
     GetAll();
 
@@ -93,9 +93,10 @@ $(function () {
             for (var i = 0; i < data.length; i++) {
                 var date = new Date(data[i].date).toLocaleDateString();
                 str += "<tr><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" +
-                    data[i].payment + "</td><td>" + date + "</td></tr>";
+                    data[i].payment + "</td><td>" + date + "</td><td>" + data[i].comment + "</td></tr>";
             }
             $("#tableUser").html(str);
+            DeleteNulls();
         });
 
     });
@@ -106,7 +107,11 @@ $(function () {
         var cityId = localStorage.getItem("city");
         var date = $("#dateWU");
         var time = $("#timeWU");
-        var dateTime = date.val() + "T" + time.val() + ":00.764";
+        var dateTime;
+        if (date.val() !== "" && time.val() !== "")
+            dateTime = date.val() + "T" + time.val() + ":00.764";
+        else
+            dateTime = "";
         var recivier = $("#recivierWU");
         var price = $("#priceList").val();
         var obj = {
@@ -128,8 +133,13 @@ $(function () {
                 Unauthorized(errorThrown);
             },
             data: obj,
-            beforeSend: function () {
-                that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
+            beforeSend: function (xhr, prop) {
+                if (dateTime == "") {
+                    xhr.abort();
+                    alert("Введіть дату");
+                }
+                else
+                    that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
             }
         }).done(function (data) {
             recivier.val("");
@@ -160,6 +170,12 @@ $(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 Unauthorized(errorThrown);
+            },
+            beforeSend: function(xhr, prop) {
+                if(date == "") {
+                    xhr.abort();
+                    alert("Введіть дату");
+                }
             },
             data: obj
         }).done(function (data) {
@@ -307,11 +323,11 @@ $(function () {
     function ToDateString(value) {
         var date = new Date(value);
         var dateString = date.getFullYear() + "-";
-        if (date.getMonth() < 10) {
-            dateString += "0" + date.getMonth() + "-";
+        if ((date.getMonth() +1) < 10) {
+            dateString += "0" + (date.getMonth() + 1) + "-";
         }
         else
-            dateString += date.getMonth() + "-";
+            dateString += (date.getMonth() + 1) + "-";
         if (date.getDate() < 10)
             dateString += "0" + date.getDate();
         else

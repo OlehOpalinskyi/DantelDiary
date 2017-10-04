@@ -240,6 +240,7 @@
     <Compile Include="Models\CityViewModel.cs" />
     <Compile Include="Models\Diary.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\Pay.cs" />
     <Compile Include="Models\PayOrder.cs" />
     <Compile Include="Models\PersonViewModel.cs" />
     <Compile Include="Models\PriceViewModel.cs" />

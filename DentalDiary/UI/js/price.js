@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://localhost:50612/";
+    var baseUrl = "http://stomat.pp.ua/";
     loadCity();
     var cityId = localStorage.getItem("city");
     BuildTable();
@@ -116,7 +116,7 @@ $(function () {
         }).done(function (data) {
             var str = "";
             for (var i = 0; i < data.length; i++) {
-                str += "<tr><td>" + data[i].id + "</td><td>" + data[i].name + "</td><td>" + data[i].price + "</td><td>" + data[i].kindOfWork + '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs editB" data-id="' + data[i].id + '" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td><td><p data-placement="top" data-toggle="tooltip"><button data-id="' + data[i].id + '" class="btn btn-danger btn-xs delD"><span class="glyphicon glyphicon-trash"></span></button></p></td></tr>';
+                str += "<tr><td>" + (i+1) + "</td><td>" + data[i].name + "</td><td>" + data[i].price + "</td><td>" + data[i].kindOfWork + '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs editB" data-id="' + data[i].id + '" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td><td><p data-placement="top" data-toggle="tooltip"><button data-id="' + data[i].id + '" class="btn btn-danger btn-xs delD"><span class="glyphicon glyphicon-trash"></span></button></p></td></tr>';
             }
             $('#priceList').html(str);
         });

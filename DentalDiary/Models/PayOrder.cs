@@ -11,5 +11,6 @@ namespace DentalDiary.Models
         public double PriceOne { get; set; }
         public int PriceId { get; set; }
         public double PriceTwo { get; set; }
+        public string Comment { get; set; }
     }
 }

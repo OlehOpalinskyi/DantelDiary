@@ -61,7 +61,7 @@ namespace DentalDiary.Controllers
         [Route("diary/{id}")]
         public ICollection<ReceptionViewModel> GetDiary(int id)
         {
-            var receptions = db.Receptions.Where(r => r.CityId == id && r.Done == false).OrderByDescending(r => r.Priority).ToList();
+            var receptions = db.Receptions.Where(r => r.CityId == id && r.Done == false).OrderByDescending(r => r.Date).ToList();
             return Map<ICollection<ReceptionViewModel>>(receptions);
         }
 
@@ -147,14 +147,15 @@ namespace DentalDiary.Controllers
             return Map<ReceptionViewModel>(rec);
         }
 
-        [HttpGet]
-        [Route("pay/{id}/{price}")]
-        public ReceptionViewModel Pay(int id, double price)
+        [HttpPost]
+        [Route("pay")]
+        public ReceptionViewModel Pay(Pay pay)
         {
-            var rec = db.Receptions.Single(r => r.Id == id);
-            rec.Payment = price;
+            var rec = db.Receptions.Single(r => r.Id == pay.OrderId);
+            rec.Payment = pay.Price;
             rec.Done = true;
-            var debt = price - rec.Price.Price;
+            rec.Comment = pay.Comment;
+            var debt = pay.Price - rec.Price.Price;
             var person = db.Persons.Single(p => p.Id == rec.PersonId);
             person.Debt += debt;
             db.SaveChanges();
@@ -165,10 +166,22 @@ namespace DentalDiary.Controllers
         [Route("pay/withorder")]
         public ReceptionViewModel PayWithOrder(PayOrder pay)
         {
-            var payFirst = Pay(pay.IdOrder, pay.PriceOne);
+            var pay1 = new Pay()
+            {
+                OrderId = pay.IdOrder,
+                Price = pay.PriceOne,
+                Comment = pay.Comment
+            };
+            var payFirst = Pay(pay1);
             payFirst.PriceId = pay.PriceId;
             var rec = AddReception(payFirst);
-            var payTwo = Pay(rec.Id, pay.PriceTwo);
+            var pay2 = new Pay()
+            {
+                OrderId = rec.Id,
+                Price = pay.PriceTwo,
+                Comment = pay.Comment
+            };
+            var payTwo = Pay(pay2);
             return payTwo;
         }
 

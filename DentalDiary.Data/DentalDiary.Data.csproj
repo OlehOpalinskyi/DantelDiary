@@ -80,6 +80,14 @@
     <Compile Include="Migrations\201709261348039_addRecomendedColumn.Designer.cs">
       <DependentUpon>201709261348039_addRecomendedColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710031300223_RecomendationColumn.cs" />
+    <Compile Include="Migrations\201710031300223_RecomendationColumn.Designer.cs">
+      <DependentUpon>201710031300223_RecomendationColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710041601474_AddCommentColumn.cs" />
+    <Compile Include="Migrations\201710041601474_AddCommentColumn.Designer.cs">
+      <DependentUpon>201710041601474_AddCommentColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
@@ -112,6 +120,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709261348039_addRecomendedColumn.resx">
       <DependentUpon>201709261348039_addRecomendedColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710031300223_RecomendationColumn.resx">
+      <DependentUpon>201710031300223_RecomendationColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710041601474_AddCommentColumn.resx">
+      <DependentUpon>201710041601474_AddCommentColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

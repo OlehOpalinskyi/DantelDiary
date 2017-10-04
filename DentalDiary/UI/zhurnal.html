@@ -3,6 +3,7 @@
 
 <head>
     <title>Стоматологія</title>
+    <meta charset="utf-8">
     <!-- Bootstrap -->
     <meta charset="utf-8">
     <link href="css/bootstrap.css" rel="stylesheet">
@@ -31,9 +32,7 @@
                        <div class="col-md-9">
                         <div class="table-responsive">
                             <table id="mytable" class="table table-bordred table-striped">
-                                <thead>
-
-                                    
+                                <thead>  
                                     <th>ПІП</th>
                                     <th>Вид робіт</th>
                                     <th>Група робіт</th>
@@ -44,8 +43,8 @@
                                     <th>Видалити</th>
                                     <th>Завершити</th>
                                 </thead>
-                                <tbody id="table">
-                                </tbody>
+                                <tbody id="priority"></tbody>
+                                <tbody id="table"></tbody>
                             </table>
                             <div class="clearfix"></div>
 
@@ -113,6 +112,7 @@
                            <p>Оплата за послугу</p>
                             <div class="form-group">
                                 <input class="form-control" id="pay1" type="text" placeholder="Оплата"> 
+                                <textarea id="comment" placeholder="Коментар..."></textarea>
                             </div>
                             <hr />
                             <p>Додати ще групу робіт (якшо така була)</p>

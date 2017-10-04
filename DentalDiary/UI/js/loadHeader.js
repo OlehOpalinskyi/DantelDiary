@@ -1,6 +1,6 @@
 function loadCity() {
         $.ajax({
-            url: "http://localhost:50612/city/all",
+            url: "http://stomat.pp.ua/city/all",
             method: "GET",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
@@ -30,8 +30,8 @@ function CheckToken() {
     }
 }
 
-function DeleteNulls() {
-    $("#table tr td").map(function (index, item) {
+function DeleteNulls(selector) {
+    $("tr td").map(function (index, item) {
         if ($(item).text() == "null")
             $(item).text("");
     });

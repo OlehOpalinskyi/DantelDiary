@@ -62,3 +62,12 @@ input[name='add'] {
     margin-top: 15px;
     margin-left: 40%;
 }
+#priority tr {
+    background-color:red;
+}
+#comment {
+    height:100px;
+    width: 100%;
+    margin-top: 25px;
+    padding:10px;
+}

@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://localhost:50612/";
+    var baseUrl = "http://stomat.pp.ua/";
    loadCity();
    var cityId = localStorage.getItem("city");
     var orderId;
@@ -44,18 +44,26 @@ $(function () {
         var id = $(this).data("id");
         orderId = id;
         that = $(this);
+        var price = that.closest('tr').find('td').eq(3).text();
+        $('#pay1').val(price);
     });
     var that;
     $("#pay").click(function() {
         var priceOne = $("#pay1").val() * 1;
         var priceTwo = $("#pay2").val() * 1;
-        if(priceTwo == "") {
+        if (priceTwo == "") {
+            var obj = {
+                orderId: orderId,
+                price: priceOne,
+                comment: $('#comment').val()
+            };
             $.ajax({
-                url: baseUrl + "receptions/pay/" + orderId + "/" + priceOne,
-                method: "GET",
+                url: baseUrl + "receptions/pay",
+                method: "post",
                 headers: {
                     Authorization: JSON.parse(localStorage.token).token
                 },
+                data: obj,
                 error: function (jqXHR, textStatus, errorThrown) {
                     Unauthorized(errorThrown);
                 }
@@ -131,7 +139,11 @@ $(function () {
     $("#editDiary").click(function() {
         var date = $("#date");
         var time = $("#time");
-        var dateTime = date.val() + "T" + time.val() + ":00.764";
+        var dateTime;
+        if (date.val() !== "" && time.val() !== "")
+            dateTime = date.val() + "T" + time.val() + ":00.764";
+        else
+            dateTime = "";
         var obj = {
             date: dateTime,
             userId: $("#editUsers").val(),
@@ -145,6 +157,12 @@ $(function () {
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 Unauthorized(errorThrown);
+            },
+            beforeSend: function(xhr, prop) {
+                if (dateTime == "") {
+                    xhr.abort();
+                    alert("¬вед≥ть дату");
+                }
             },
             data: obj
         }).done(function(data) {
@@ -223,29 +241,37 @@ $(function () {
     }).done(function(data) {
         BuildTable(data);
         DeleteNulls();
-        Priority();
     });
     }
     
     function BuildTable(data) {
         var str = "";
-        for(var i=0; i<data.length; i++) {
-            var dateTime = new Date(data[i].date);
-            var date = dateTime.toLocaleDateString();
-            var time = dateTime.toLocaleTimeString();
-            if (data[i].recomended == true) {
-                str += "<tr class='recomend' data-priority='";
-            }
-            else
-                str += "<tr data-priority='";
+        var important = "";
+        if (data.length > 0) {
+            for (var i = 0; i < data.length; i++) {
+                var item = "";
+                var dateTime = new Date(data[i].date);
+                var date = dateTime.toLocaleDateString();
+                var time = dateTime.toLocaleTimeString();
+                if (data[i].recomended == true) {
+                    item += "<tr class='recomend'><td>";
+                }
+                else
+                    item += "<tr><td>";
 
-            str += data[i].priority +"'><td>" + data[i].customer + "</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + 
-                "</td><td>" + data[i].priceCount + "</td><td>" + date + "</td><td>" + time +"</td>" + 
-                '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs" data-id="'+ data[i].id+ '" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>' + 
-                '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="'+
-                data[i].id+'"><span class="glyphicon glyphicon-trash"></span></button></p></td>' + '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-success btn-xs" data-toggle="modal" data-target="#finish" data-id="'+ data[i].id + '"><span class="glyphicon glyphicon-plus"></span></button></p></td></tr>';
+                item += data[i].customer + "</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork +
+                    "</td><td>" + data[i].priceCount + "</td><td>" + date + "</td><td>" + time + "</td>" + '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs" data-id="' + data[i].id + '" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td>' +
+                    '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="' +
+                    data[i].id + '"><span class="glyphicon glyphicon-trash"></span></button></p></td>' + '<td class="text-center"><p data-placement="top" data-toggle="tooltip"><button class="btn btn-success btn-xs" data-toggle="modal" data-target="#finish" data-id="' + data[i].id + '"><span class="glyphicon glyphicon-plus"></span></button></p></td></tr>';
+
+                if (data[i].priority > 1)
+                    important += item;
+                else
+                    str += item;
             }
+        }
         $("#table").html(str);
+        $("#priority").html(important);
     }
 
     function Priority() {

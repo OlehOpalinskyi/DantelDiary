@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://localhost:50612/";
+    var baseUrl = "http://stomat.pp.ua/";
     loadCity();
     $( "#tabs" ).tabs();
     $(document).on("click", '#cities li', function() {
@@ -55,7 +55,11 @@ $(function () {
             var cityId = localStorage.getItem("city");
             var date = $("#dateWU");
             var time = $("#timeWU");
-            var dateTime = date.val() + "T" + time.val() + ":00.764";
+            var dateTime;
+            if (date.val() !== "" && time.val() !== "")
+                dateTime = date.val() + "T" + time.val() + ":00.764";
+            else
+                dateTime = "";
             var recivier = $("#recivierWU");
             var price = $("#namePriceWU").val();
             var person = $("#users").val();
@@ -77,8 +81,13 @@ $(function () {
                     Unauthorized(errorThrown);
                 },
                 data: obj,
-                beforeSend: function () {
-                    that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
+                beforeSend: function (xhr, opts) {
+                    if (dateTime == "") {
+                        xhr.abort();
+                        alert("Введіть дату");
+                    }
+                    else
+                        that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
                 }
             }).done(function(data) {
                 recivier.val("");
@@ -94,7 +103,11 @@ $(function () {
             var cityId = localStorage.getItem("city");
             var date = $("#date");
             var time = $("#time");
-            var dateTime = date.val() + "T" + time.val() + ":00.764";
+            var dateTime;
+            if (date.val() !== "" && time.val() !== "")
+                dateTime = date.val() + "T" + time.val() + ":00.764";
+            else
+                dateTime = "";
             var name = $("#name");
             var tel = $("#tel");
             var address = $("#adress");
@@ -125,8 +138,13 @@ $(function () {
                     Unauthorized(errorThrown);
                 },
                 data: obj,
-                beforeSend: function () {
-                    that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
+                beforeSend: function (xhr, prop) {
+                    if (dateTime == "") {
+                        xhr.abort();
+                        alert("Введіть дату");
+                    }
+                    else
+                        that.html('<i class="fa fa-spinner fa-spin fa-2x fa-fw"></i><span class="sr-only">Loading...</span>');
                 }
             }).done(function(data) {
                 name.val("");

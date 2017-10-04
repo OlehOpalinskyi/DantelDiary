@@ -18,6 +18,7 @@ namespace DentalDiary.Data.Models
         public bool Done { get; set; }
         public int Priority { get; set; }
         public bool Recomended { get; set; }
+        public string Comment { get; set; }
 
         public int PersonId { get; set; }
         public int CityId { get; set; }

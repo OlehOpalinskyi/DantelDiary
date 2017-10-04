@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://localhost:50612/";
+    var baseUrl = "http://stomat.pp.ua/";
     var cityId = localStorage.getItem("city");
     loadCity();
     GetAll();
