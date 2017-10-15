@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://stomat.pp.ua/";
+ //   var baseUrl = "http://stomat.pp.ua/";
     loadCity();
     var cityId = localStorage.getItem("city");
     BuildTable();
@@ -21,6 +21,12 @@ $(function () {
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
             },
+            beforeSend: function (xhr, opts) {
+                if(price.name == "" || price.price == "" || price.kindOfWork == "") {
+                    xhr.abort();
+                    alert("Vvedit usi polya");
+                }
+            },
             error: function (jqXHR, textStatus, errorThrown) {
                 Unauthorized(errorThrown);
             },
@@ -31,6 +37,7 @@ $(function () {
             groupP.val("");
             var record = "<tr><td>" + data.id + "</td><td>" + data.name + "</td><td>" + data.price + "</td><td>" + data.kindOfWork + '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs editB" data-id="'+ data.id + '" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td><td><p data-placement="top" data-toggle="tooltip"><button data-id="' + data.id + '" class="btn btn-danger btn-xs delD"><span class="glyphicon glyphicon-trash"></span></button></p></td></tr>';
             $('#priceList').append(record);
+            BuildTable();
         });
     });
     
@@ -116,7 +123,9 @@ $(function () {
         }).done(function (data) {
             var str = "";
             for (var i = 0; i < data.length; i++) {
-                str += "<tr><td>" + (i+1) + "</td><td>" + data[i].name + "</td><td>" + data[i].price + "</td><td>" + data[i].kindOfWork + '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs editB" data-id="' + data[i].id + '" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td><td><p data-placement="top" data-toggle="tooltip"><button data-id="' + data[i].id + '" class="btn btn-danger btn-xs delD"><span class="glyphicon glyphicon-trash"></span></button></p></td></tr>';
+                if (data[i].id == 2015)
+                    continue;
+                str += "<tr><td>" + i + "</td><td>" + data[i].name + "</td><td>" + data[i].price + "</td><td>" + data[i].kindOfWork + '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs editB" data-id="' + data[i].id + '" data-toggle="modal" data-target="#edit"><span class="glyphicon glyphicon-pencil"></span></button></p></td><td><p data-placement="top" data-toggle="tooltip"><button data-id="' + data[i].id + '" class="btn btn-danger btn-xs delD"><span class="glyphicon glyphicon-trash"></span></button></p></td></tr>';
             }
             $('#priceList').html(str);
         });

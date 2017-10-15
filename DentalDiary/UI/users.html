@@ -19,13 +19,13 @@
             </div>
             <ul class="nav navbar-nav" id="cities"></ul>
         </div>
-    </nav> &nbsp; &nbsp; &nbsp;<a href="index.html"><span class="glyphicon glyphicon-home"></span> Назад на головне меню</a>
+    </nav>      <a href="index.html"><span class="glyphicon glyphicon-home"></span> Назад на головне меню</a>
     <div class="container">
         <div class="row">
 
             <input type="text" id="myInput" placeholder="Пошук..." title="Пошук">
               <p style="font-weight: bold;">Кількість пацієнтів - <span id="count"></span>
-                  <input type="button" name="add" value="Добавити пцієнта" class="btn btn-default" data-toggle="modal" data-target="#add" />
+                  <input type="button" name="add" value="Додати пацієнта" class="btn btn-default" data-toggle="modal" data-target="#add" />
             </p>
                    <hr />
                     <div class="col-md-12">
@@ -53,7 +53,7 @@
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal">×</button>
         <h4 class="modal-title text-center">Перегляд пацієнта</h4>
       </div>
       <div class="modal-body">
@@ -102,7 +102,7 @@
                 </div>
                 <hr />
                 <div class="row">   
-                    <div class="col-md-4"><span class="glyphicon glyphicon-upload"></span> Борг</div><div class="col-md-8" style="color:red;">
+                    <div class="col-md-4"><span class="glyphicon glyphicon-lock"></span> Борг</div><div class="col-md-8" style="color:red;">
                      <input type="number" id="debt">
                      </div>
                 </div>
@@ -137,7 +137,8 @@
                        <p><input type="file" name="photo" id="img" multiple accept="image/*"><br />
                        <input type="hidden" name="id" id="id">
                        <input type="button" value="Зберегти" id="sendImg"></p>
-                       <button type="button" value="Галарея"><a href="" id="galary" target="_blank">Галарея</a></button><br>
+                        <a href="" id="galary" target="_blank">Галарея</a>
+                       <br>
                        <button id="order" type="button" class="btn btn-success" data-toggle="modal" data-target="#addOrder" data-id="">Записати на прийом</button>
                     </form>
             </div>
@@ -145,11 +146,11 @@
                         <div class="table-responsive">
                             <table id="mytable" class="table table-bordred table-striped">
                                 <thead>
+                                    <th>Дата</th>
                                     <th>Назва</th>
                                     <th>Група робіт</th>
                                     <th>Ціна</th>
-                                    <th>Оплата</th>
-                                    <th>Дата</th>
+                                    <th>Оплата</th>  
                                     <th>Коментар</th>
                                 </thead>
                                 <tbody id="tableUser">
@@ -185,7 +186,7 @@
                         </div>
                         <div class="modal-body">
                             <div class="form-group">
-                                <input id="name" class="form-control " type="text" placeholder="Ім'я та фамілія">
+                                <input id="name" class="form-control " type="text" placeholder="Ім'я та Прізвище">
                             </div>
                             <div class="form-group">
                                 <input id="address" class="form-control " type="text" placeholder="Адреса">
@@ -281,7 +282,27 @@
                         </div>
                     </div>
                 </div>
-            </div>  
+            </div> 
+            
+            <div id="delete" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title">Ви впевнені?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p><button type="button" id="del" class="btn btn-danger">Так</button><button type="button" class="btn btn-primary" data-dismiss="modal">Ні</button></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div> 
     </div>
     </div>    
 

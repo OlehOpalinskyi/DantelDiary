@@ -88,6 +88,14 @@
     <Compile Include="Migrations\201710041601474_AddCommentColumn.Designer.cs">
       <DependentUpon>201710041601474_AddCommentColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710092002484_AddReturn.cs" />
+    <Compile Include="Migrations\201710092002484_AddReturn.Designer.cs">
+      <DependentUpon>201710092002484_AddReturn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710111915379_approximateTime.cs" />
+    <Compile Include="Migrations\201710111915379_approximateTime.Designer.cs">
+      <DependentUpon>201710111915379_approximateTime.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\CityDataModel.cs" />
     <Compile Include="Models\ReceptionDataModel.cs" />
@@ -126,6 +134,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710041601474_AddCommentColumn.resx">
       <DependentUpon>201710041601474_AddCommentColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710092002484_AddReturn.resx">
+      <DependentUpon>201710092002484_AddReturn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710111915379_approximateTime.resx">
+      <DependentUpon>201710111915379_approximateTime.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

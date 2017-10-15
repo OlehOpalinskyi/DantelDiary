@@ -1,6 +1,6 @@
-$(function () {
+﻿$(function () {
     CheckToken();
-    var baseUrl = "http://stomat.pp.ua/";
+   // var baseUrl = "http://stomat.pp.ua/";
     loadCity();
     GetAll();
 
@@ -17,16 +17,21 @@ $(function () {
     }).done(function (data) {
         var str = "";
         for (var i = 0; i < data.length; i++) {
+            if (data[i].id == 2015)
+                continue;
             str += '<option value="' + data[i].id + '">' + data[i].name + "</option>";
         }
         $("#priceList").html(str);
         $("#price").html(str);
     });
-
+    var idPerson;
+    var el;
     $(document).on("click", ".btn-danger.btn-xs", function () {
         var id = $(this).data("id");
+        idPerson = id;
         var that = $(this);
-        $.ajax({
+        el = that;
+        /*$.ajax({
             url: baseUrl + "person/delete/" + id,
             method: "DELETE",
             headers: {
@@ -37,9 +42,14 @@ $(function () {
             },
         }).done(function (data) {
             that.closest("tr").remove();
-        });
+        });*/
     });
-    var idPerson;
+
+    $('#del').click(function () {
+        Delete(idPerson, el);
+        $('#delete .close').click();
+    });
+
     $(document).on("click", ".btn-info", function () {
         var id = $(this).data("id");
         $("#order").data("id", id);
@@ -56,18 +66,25 @@ $(function () {
                 Unauthorized(errorThrown);
             }
         }).done(function (data) {
-            console.log(data);
-            var dob = ToDateString(data.dateOfBirth);
-            var fVisit = ToDateString(data.firstVisit);
-            var lVisit = ToDateString(data.lastVisit);
+            var dob = ""; var fvisit = ""; var lvisit = "";
+            if (data.debt > 0)
+                $("#debt").css('color', 'green');
+            else
+                $("#debt").css('color', 'red');
+            if (data.dateOfBirth !== null)
+                dob = ToDateString(data.dateOfBirth);
+            else if (data.firstVisit !== null)
+                fvisit = ToDateString(data.firstVisit);
+            else if (data.lastVisit !== null)
+                lvisit = ToDateString(data.lastVisit);
             var recomendDate = ToDateString(data.recomendDate);
             $("#name").val(data.fullName);
             $("#phone").val(data.phoneNumber);
             $("#email").val(data.email);
             $("#address").val(data.address);
             $("#dob").val(dob);
-            $("#fVisit").val(fVisit);
-            $("#lVisit").val(lVisit);
+            $("#fVisit").val(fvisit);
+            $("#lVisit").val(lvisit);
             $("#debt").val(data.debt);
             $("#complaints").val(data.complaints);
             $("#lastTreatment").val(data.lastTreatment);
@@ -92,8 +109,8 @@ $(function () {
             var str = "";
             for (var i = 0; i < data.length; i++) {
                 var date = new Date(data[i].date).toLocaleDateString();
-                str += "<tr><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" +
-                    data[i].payment + "</td><td>" + date + "</td><td>" + data[i].comment + "</td></tr>";
+               str += "<tr><td>"+date+"</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" +
+                    data[i].payment + "</td><td>" + data[i].comment + "</td></tr>";
             }
             $("#tableUser").html(str);
             DeleteNulls();
@@ -179,7 +196,8 @@ $(function () {
             },
             data: obj
         }).done(function (data) {
-            console.log(data);
+            var date = $("#recomendDate").val("");
+            alert("Zapus dobavleno");
         });
     });
 
@@ -288,9 +306,10 @@ $(function () {
             fullName: name.val(),
             email: email.val(),
             phoneNumber: phone.val(),
-            firstVisit: dfv.val() + "T",
-            lastVisit: dlv.val() + "T",
-            dateOfBirth: dob.val() + "T"
+            firstVisit: dfv.val(),
+            lastVisit: dlv.val(),
+            dateOfBirth: dob.val(),
+            address: address.val()
         };
         $.ajax({
             url: baseUrl + "person/create",
@@ -349,6 +368,8 @@ $(function () {
                 $("#table").html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
             }
         }).done(function (data) {
+            if (data.length == 0)
+                $("#table").html('');
             BuildTable(data);
         });
     }
@@ -365,11 +386,29 @@ $(function () {
                 str += "<tr><td>";
 
             str += data[i].fullName + "</td><td>" + data[i].address + "</td><td>" + data[i].email + "</td><td>" + data[i].phoneNumber +
-                '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="' + data[i].id +
+                '</td><td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#delete" data-id="' + data[i].id +
                 '"><span class="glyphicon glyphicon-trash"></span></button></p></td>' + '<td><button data-toggle="modal" data-target="#pacient" type="button" class="btn-info" data-id="' +
                 data[i].id + '">Карточка</button></td></tr>';
             $("#table").html(str);
             DeleteNulls();
         }
     }
+
+    function Delete(id, that) {
+        $.ajax({
+            url: baseUrl + "person/delete/" + id,
+            method: "DELETE",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
+        }).done(function (data) {
+            that.closest("tr").remove();
+        });
+    }
 });
+
+
+

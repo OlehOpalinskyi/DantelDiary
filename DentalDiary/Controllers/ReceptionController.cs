@@ -22,10 +22,18 @@ namespace DentalDiary.Controllers
             return Map<ICollection<ReceptionViewModel>>(receptions);
         }
 
+        [HttpGet]
+        [Route("get-reception/{id}")]
+        public ReceptionViewModel GetReception(int id)
+        {
+            var reception = db.Receptions.Single(s => s.Id == id);
+            return Map<ReceptionViewModel>(reception);
+        }
+
         [Route("reciviers/bycity/{id}")]
         public ICollection<ReceptionViewModel> WithRecivier(int id)
         {
-            var receptions = db.Receptions.Where(r => r.CityId == id && r.Recivier != null).ToList();
+            var receptions = db.Receptions.Where(r => r.CityId == id && r.Recivier != null).OrderBy(r => r.IsReturn).ToList();
             return Map<ICollection<ReceptionViewModel>>(receptions);
         }
 
@@ -41,7 +49,7 @@ namespace DentalDiary.Controllers
         [Route("search-by-recivier/{id}")]
         public ICollection<ReceptionViewModel> SortByRecivier(int id, string customer)
         {
-            var rec = db.Receptions.Where(r => r.CityId == id && r.Recivier.Contains(customer)).ToList();
+            var rec = db.Receptions.Where(r => r.CityId == id && (r.Recivier.Contains(customer) || r.Preson.FullName.Contains(customer))).ToList();
             return Map<ICollection<ReceptionViewModel>>(rec);
         }
 
@@ -49,8 +57,14 @@ namespace DentalDiary.Controllers
         public ICollection<ReceptionViewModel>SortByDate(DateTime date, int cityId)
         {
             var recs = new List<ReceptionDataModel>();
-            var dbR = db.Receptions.Where(r => r.CityId == cityId && r.Done == false).ToList();
-            foreach(var item in dbR)
+            var dbr = new List<ReceptionDataModel>();
+            if(DateTime.Compare(date, DateTime.Now) < 0)
+                dbr = db.Receptions.Where(r => r.CityId == cityId).OrderBy(r => r.Date).ToList();
+            else
+            {
+                dbr = db.Receptions.Where(r => r.CityId == cityId && r.Done == false).OrderBy(r => r.Date).ToList();
+            }
+            foreach(var item in dbr)
             {
                 if (item.Date.Value.Date == date.Date)
                     recs.Add(item);
@@ -118,8 +132,8 @@ namespace DentalDiary.Controllers
         public ReceptionViewModel ReceptionWithoutPerson(Order order)
         {
             var dataPerson = Map<PersonDataModel>(order.Person);
-            dataPerson.FirstVisit = DateTime.Now;
-            dataPerson.LastVisit = DateTime.Now;
+            dataPerson.FirstVisit = order.RecInfo.Date;
+            dataPerson.LastVisit = order.RecInfo.Date;
             dataPerson.DateOfBirth = DateTime.Now;
             db.Persons.Add(dataPerson);
             db.SaveChanges();
@@ -139,10 +153,12 @@ namespace DentalDiary.Controllers
 
         [HttpPut]
         [Route("edit-recivier/{id}")]
-        public ReceptionViewModel EditRcivier(int id, string recivier)
+        public ReceptionViewModel EditRcivier(int id, Recivier recivier)
         {
             var rec = db.Receptions.Single(r => r.Id == id);
-            rec.Recivier = recivier;
+            rec.Recivier = recivier.Name;
+            rec.Return = recivier.ReturnPay;
+            rec.IsReturn = recivier.IsReturn;
             db.SaveChanges();
             return Map<ReceptionViewModel>(rec);
         }

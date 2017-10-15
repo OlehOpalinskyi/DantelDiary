@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://stomat.pp.ua/";
+  //  var baseUrl = "http://stomat.pp.ua/";
     loadCity();
     $( "#tabs" ).tabs();
     $(document).on("click", '#cities li', function() {
@@ -23,7 +23,9 @@ $(function () {
             },
         }).done(function(data) {
             var str = "";
-            for(var i=0; i<data.length; i++) {
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].id == 2015)
+                    continue;
                 str+= '<option value="'+ data[i].id +'">' + data[i].name + "</option>";
             }
             $("#namePrice").html(str);
@@ -63,11 +65,13 @@ $(function () {
             var recivier = $("#recivierWU");
             var price = $("#namePriceWU").val();
             var person = $("#users").val();
+            var approximate = $('#approximateWU').val();
             var obj = {
                 date: dateTime,
                 recivier: recivier.val(),
                 personId: person,
                 cityId: cityId,
+                approximateTime: approximate,
                 priceId: price,
                 priority: $("#priorityW").val()
             };
@@ -113,6 +117,7 @@ $(function () {
             var address = $("#adress");
             var recivier = $("#recivier");
             var price = $("#namePrice").val();
+            var approximate = $("#approximate").val();
             var obj = {
                 person: {
                     fullName: name.val(),
@@ -123,6 +128,7 @@ $(function () {
                 recInfo: {
                     date: dateTime,
                     cityId: cityId,
+                    approximateTime: approximate,
                     priceId: price,
                     recivier: recivier.val(),
                     priority: $("#priority").val()

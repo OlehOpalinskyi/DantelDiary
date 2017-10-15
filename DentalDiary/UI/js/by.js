@@ -1,6 +1,6 @@
 $(function () {
     CheckToken();
-    var baseUrl = "http://stomat.pp.ua/";
+ //   var baseUrl = "http://stomat.pp.ua/";
     var cityId = localStorage.getItem("city");
     loadCity();
     GetAll();
@@ -25,24 +25,46 @@ $(function () {
     var id;
     $(document).on("click", ".btn-primary.btn-xs", function() {
         id = $(this).data("id");
-    });
-    
-    $("#editRecivier").click(function() {
-        var recivier = $("#recivier").val();
         $.ajax({
-            url: baseUrl + "receptions/edit-recivier/" + id + "?recivier=" + recivier,
-            method: "PUT",
+            url: baseUrl + "receptions/get-reception/" + id,
+            method: 'get',
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 Unauthorized(errorThrown);
+            },
+            success: function (data) {
+                $('#recivier').val(data.recivier);
+                $('#return').val(data.return);
+                if (data.isReturn === true) {
+                    $('#isReturn').attr("checked", "checked");
+                }
             }
-        }).done(function(data) {
-            console.log(data);
-            BuildTable();
-            DeleteNulls();
-            $("#close").click();
+        });
+    });
+    
+    $("#editRecivier").click(function() {
+        var recivier = $("#recivier").val();
+        var obj = {
+            name: recivier,
+            returnPay: $('#return').val(),
+            isReturn: $('#isReturn').prop("checked")
+        };
+        $.ajax({
+            url: baseUrl + "receptions/edit-recivier/" + id,
+            method: "PUT",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
+            data: obj,
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
+            success: function (data) {
+                GetAll();
+                $("#close").click();
+            }
         });
     });
     
@@ -89,6 +111,7 @@ $(function () {
     }).done(function(data) {
         BuildTable(data);
         DeleteNulls();
+        Returned();
     });
     }
     
@@ -97,9 +120,15 @@ $(function () {
         for(var i=0; i<data.length; i++) {
             var dateTime = new Date(data[i].date);
             var date = dateTime.toLocaleDateString();
-            str += "<tr><td>" + data[i].recivier + "</td><td>" + data[i].customer +"</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" + data[i].payment + "</td><td>" + date +"</td>" + 
+            str += "<tr data-return='" + data[i].isReturn + "'><td>" + data[i].recivier + "</td><td>" + data[i].customer + "</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" + data[i].payment + "</td><td>" + data[i].return + "</td><td>" + date + "</td>" +
                 '<td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#edit" data-id="'+data[i].id + '"><span class="glyphicon glyphicon-pencil"></span></button></p></td>' + '<td><p data-placement="top" data-toggle="tooltip"><button class="btn btn-danger btn-xs" data-id="'+data[i].id + '"><span class="glyphicon glyphicon-trash"></span></button></p></td></tr>'
             }
         $("#table").html(str);
+    }
+
+    function Returned() {
+        $('tr[data-return="true"]').map(function (i, el) {
+            $(el).addClass('green');
+        });
     }
 })

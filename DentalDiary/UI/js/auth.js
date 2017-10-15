@@ -4,7 +4,7 @@
         var password = $("input[name='pass']");
 
         $.ajax({
-            url: "http://stomat.pp.ua/token",
+            url: baseUrl + "token",
             method: "post",
             data: {
                 grant_type: "password",

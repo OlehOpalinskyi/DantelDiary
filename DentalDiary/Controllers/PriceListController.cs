@@ -18,7 +18,7 @@ namespace DentalDiary.Controllers
         [HttpGet]
         public IEnumerable<PriceViewModel> GetPriceList(int id)
         {
-            var priceList = db.PriceList.Where(pl => pl.CityId == id).OrderBy(p => p.Name);
+            var priceList = db.PriceList.Where(pl => pl.CityId == id).OrderBy(p => p.Name).ToList();
             return Map<IEnumerable<PriceViewModel>>(priceList);
         }
 
@@ -28,6 +28,14 @@ namespace DentalDiary.Controllers
         {
             var price = db.PriceList.Single(p => p.Id == id);
             return Map<PriceViewModel>(price);
+        }
+
+        [HttpGet]
+        [Route("price/{id}")]
+        public double OnlyPrice(int id)
+        {
+            var price = db.PriceList.Single(p => p.Id == id);
+            return price.Price;
         }
 
         [Route("create")]
@@ -60,6 +68,7 @@ namespace DentalDiary.Controllers
             var editPrice = db.PriceList.Single(pl => pl.Id == id);
             editPrice.Id = id;
             editPrice.CityId = price.CityId;
+            editPrice.KindOfWork = price.KindOfWork;
             editPrice.Name = price.Name;
             editPrice.Price = price.Price;
             editPrice.City = city;

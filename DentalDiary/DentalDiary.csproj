@@ -199,6 +199,7 @@
     <Content Include="UI\css\bootstrap-theme.css" />
     <Content Include="UI\css\bootstrap.css" />
     <Content Include="UI\css\font-awesome.min.css" />
+    <Content Include="UI\css\jquery-ui.min.css" />
     <Content Include="UI\css\style.css" />
     <Content Include="UI\fonts\fontawesome-webfont.svg" />
     <Content Include="UI\fonts\glyphicons-halflings-regular.svg" />
@@ -214,6 +215,7 @@
     <Content Include="UI\js\bootstrap.js" />
     <Content Include="UI\js\by.js" />
     <Content Include="UI\js\jquery-1.8.3.min.js" />
+    <Content Include="UI\js\jquery-ui.min.js" />
     <Content Include="UI\js\loadHeader.js" />
     <Content Include="UI\js\main.js" />
     <Content Include="UI\js\price.js" />
@@ -245,6 +247,7 @@
     <Compile Include="Models\PersonViewModel.cs" />
     <Compile Include="Models\PriceViewModel.cs" />
     <Compile Include="Models\ReceptionViewModel.cs" />
+    <Compile Include="Models\Recivier.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -271,6 +274,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="UI\css\images\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DentalDiary.Data\DentalDiary.Data.csproj">

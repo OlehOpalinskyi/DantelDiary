@@ -11,7 +11,6 @@
     <link href="css/font-awesome.min.css" rel="stylesheet" />
     <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
 
 <body>
     <nav class="navbar navbar-default">
@@ -30,26 +29,26 @@
                     <div class="panel-body text-center">
                         <div class="row">
                             <div class="col-md-6 navi">
-                                <button type="button" id="reception" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#newPriyom">Запис на прийом &nbsp; <span class="glyphicon glyphicon-pencil"></span></button>
+                                <button type="button" id="reception" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#newPriyom">Запис на прийом   <span class="glyphicon glyphicon-pencil"></span></button>
                             </div>
                             <div class="col-md-6 navi">
                                 <a href="users.html">
-                                    <button type="button" class="btn btn-primary btn-lg btn-block">Перегляд пацієнта &nbsp; <span class="glyphicon glyphicon-user"></span></button>
+                                    <button type="button" class="btn btn-primary btn-lg btn-block">Перегляд пацієнта   <span class="glyphicon glyphicon-user"></span></button>
                                 </a>
                             </div>
                             <div class="col-md-6 navi">
                                 <a href="preiskurant.html">
-                                    <button type="button" class="btn btn-primary btn-lg btn-block">Прейcкурант &nbsp; <span class="glyphicon glyphicon-list-alt"></span></button>
+                                    <button type="button" class="btn btn-primary btn-lg btn-block">Прейcкурант   <span class="glyphicon glyphicon-list-alt"></span></button>
                                 </a>
                             </div>
                             <div class="col-md-6 navi">
                                <a href="zhurnal.html">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Журнал &nbsp; <span class="glyphicon glyphicon-book"></span></button>
+                                <button type="button" class="btn btn-primary btn-lg btn-block">Журнал   <span class="glyphicon glyphicon-book"></span></button>
                                 </a>
                             </div>
                             <div class="col-md-6 navi">
                                <a href="by.html">
-                                <button type="button" class="btn btn-primary btn-lg btn-block">Ким скерований &nbsp; <span class="glyphicon glyphicon-book"></span></button>
+                                <button type="button" class="btn btn-primary btn-lg btn-block">Ким скерований   <span class="glyphicon glyphicon-book"></span></button>
                                 </a>    
                             </div>
                         </div>
@@ -64,7 +63,7 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <!--<div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
                     <h4 class="modal-title">Запис на прийом</h4> </div>-->
                 <div class="modal-body">
                    <div id="tabs">
@@ -89,6 +88,9 @@
                            <div class="input-group col-md-12"> <span class="input-group-addon"><i class="glyphicon glyphicon-hand-right"></i></span>
                             <input id="recivier" type="text" class="form-control" name="recivier" placeholder="Ким скерований"> 
                         </div>
+                               <div class="input-group col-md-12">
+                                   <input id="approximate" type="text" class="form-control" name="approximate" placeholder="Приблизний час прийому">
+                               </div>
                             <br />
                         <div class="form-group">
                             <label for="dtp_input2" class="сol-md-2 control-label">Дата запису</label>
@@ -155,6 +157,9 @@
                             </div>
                             <input type="hidden" id="dtp_input3" value="" /><br/>
                         </div>
+                           <div class="input-group col-md-12">
+                               <input id="approximateWU" type="text" class="form-control" name="approximate" placeholder="Приблизний час прийому">
+                           </div>
                         
                      <div class="form-group">
                         <label class="сol-md-2 control-label">Група робіт</label>

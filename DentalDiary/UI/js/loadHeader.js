@@ -1,6 +1,7 @@
+var baseUrl = "http://stomat.pp.ua/"
 function loadCity() {
         $.ajax({
-            url: "http://stomat.pp.ua/city/all",
+            url: baseUrl + "city/all",
             method: "GET",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token

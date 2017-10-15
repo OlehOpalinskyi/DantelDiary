@@ -1,3 +1,15 @@
+﻿@media (min-width: 200px) and (max-width: 1000px) {
+ #myInput {
+   margin-top: 250px !important;
+  }
+
+#ui-datepicker-div {
+left:25% !important;
+top:300px !important;
+}
+}
+
+
 body {
     background: url('../img/bg.png') repeat ;
 }
@@ -50,10 +62,10 @@ input[name='add'] {
     float:right;
 }
 .recomend {
-    background-color:orangered;
+    background-color: silver;
 }
 #table .debt {
-    background-color:red;
+    background-color:lightcoral;
 }
 #price {
     margin-top:20px;
@@ -63,7 +75,7 @@ input[name='add'] {
     margin-left: 40%;
 }
 #priority tr {
-    background-color:red;
+    background-color: tomato;
 }
 #comment {
     height:100px;
@@ -71,3 +83,44 @@ input[name='add'] {
     margin-top: 25px;
     padding:10px;
 }
+#delete p {
+    text-align:center
+}
+#del {
+    margin-right:20px;
+}
+.green {
+    background-color:aquamarine !important;
+}
+#galary {
+    text-decoration:none;
+    padding:5px 15px;
+    border-radius:3px;
+    cursor:pointer;
+    background-color: #52AC52;
+    color:white;
+}
+#order {
+    margin-top: 10px;
+}
+#approximate, #approximateWU {
+    margin: 10px 0;
+}
+.modal-dialog {
+    margin-top: 100px !important;
+}
+#addedPrice {
+    display:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
