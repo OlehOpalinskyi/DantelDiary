@@ -23,6 +23,7 @@
         }
         $("#priceList").html(str);
         $("#price").html(str);
+        $("#hPrice").html(str);
     });
     var idPerson;
     var el;
@@ -52,6 +53,7 @@
 
     $(document).on("click", ".btn-info", function () {
         var id = $(this).data("id");
+        idPerson = id;
         $("#order").data("id", id);
         $("#addDate").data("id", id);
         $("#id").val(id);
@@ -73,9 +75,9 @@
                 $("#debt").css('color', 'red');
             if (data.dateOfBirth !== null)
                 dob = ToDateString(data.dateOfBirth);
-            else if (data.firstVisit !== null)
+            if (data.firstVisit !== null)
                 fvisit = ToDateString(data.firstVisit);
-            else if (data.lastVisit !== null)
+            if (data.lastVisit !== null)
                 lvisit = ToDateString(data.lastVisit);
             var recomendDate = ToDateString(data.recomendDate);
             $("#name").val(data.fullName);
@@ -109,15 +111,37 @@
             var str = "";
             for (var i = 0; i < data.length; i++) {
                 var date = new Date(data[i].date).toLocaleDateString();
-               str += "<tr><td>"+date+"</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" +
-                    data[i].payment + "</td><td>" + data[i].comment + "</td></tr>";
+               str += "<tr data-id='" + data[i].id + "'><td>"+date+"</td><td>" + data[i].priceName + "</td><td>" + data[i].kindOfWork + "</td><td>" + data[i].priceCount + "</td><td>" +
+                    data[i].payment + "</td><td><input type='text' class='comment' value='" + data[i].comment + "'></td></tr>";
             }
             $("#tableUser").html(str);
-            DeleteNulls();
+            DeleteNulls("#tableUser");
         });
 
     });
 
+    $(document).on('keypress', '.comment', function (e) {
+        if (e.which == 13) {
+            var orderId = $(this).closest('tr').data('id');
+            var comment = $(this).val();
+        
+            $.ajax({
+                url: baseUrl + "person/edit/comment?id="+orderId+"&comment=" + comment,
+                method: "put",
+                headers: {
+                    Authorization: JSON.parse(localStorage.token).token
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    Unauthorized(errorThrown);
+                },
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+        }
+       
+    });
+    
     $("#createRec").click(function () {
         var id = $("#order").data("id");
         var that = $(this);
@@ -164,6 +188,38 @@
             time.val("");
             that.html("Add");
             $(".close").click();
+        });
+    });
+
+    $('#addHistory').click(function () {
+        var dateHistory = $('#dateH');
+        var comment = $('#hComment');
+        var priceId = $('#hPrice')
+        var obj = {
+            date: dateHistory.val(),
+            comment: comment.val(),
+            priceId: priceId.val(),
+            personId: idPerson,
+            cityId: cityId
+        };
+        $.ajax({
+            url: baseUrl + "receptions/add-history",
+            method: "post",
+            headers: {
+                Authorization: JSON.parse(localStorage.token).token
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                Unauthorized(errorThrown);
+            },
+            data: obj,
+            success: function (data) {
+                var date = new Date(data.date).toLocaleDateString();
+                row = "<tr data-id='" + data.id + "'><td>" + date + "</td><td>" + data.priceName + "</td><td>" + data.kindOfWork + "</td><td>" + data.priceCount + "</td><td>" +
+                     data.payment + "</td><td><input type='text' class='comment' value='" + data.comment + "'></td></tr>";
+                $("#tableUser").append(row);
+                DeleteNulls("#tableUser");
+                comment.val("");
+            }
         });
     });
 
@@ -256,6 +312,13 @@
             method: "PUT",
             headers: {
                 Authorization: JSON.parse(localStorage.token).token
+            },
+            beforeSend: function (xhr, prop) {
+                var patt = new RegExp(/(\d{4})-(\d{2})-(\d{2})/);
+                if (patt.test(dob) == false || patt.test(fv) == false || patt.test(lv) == false) {
+                    xhr.abort();
+                    alert("data povunna bytu y formati yyyy-mm-dd (2017-10-15)");
+                }
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 Unauthorized(errorThrown);

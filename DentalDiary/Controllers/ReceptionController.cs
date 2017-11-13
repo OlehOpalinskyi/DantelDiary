@@ -79,6 +79,27 @@ namespace DentalDiary.Controllers
             return Map<ICollection<ReceptionViewModel>>(receptions);
         }
 
+        [HttpPost]
+        [Route("add-history")]
+        public ReceptionViewModel AddHistory(ReceptionViewModel rec)
+        {
+            var person = db.Persons.Single(p => p.Id == rec.PersonId);
+            var city = db.Cities.Single(c => c.Id == rec.CityId);
+            var price = db.PriceList.Single(pr => pr.Id == rec.PriceId);
+            var dataRec = Map<ReceptionDataModel>(rec);
+            dataRec.Price = price;
+            dataRec.City = city;
+            dataRec.Preson = person;
+            dataRec.Payment = price.Price;
+            dataRec.Done = true;
+            dataRec.Priority = 1;
+
+            db.Receptions.Add(dataRec);
+            db.SaveChanges();
+
+            return Map<ReceptionViewModel>(dataRec);
+        }
+
         [Route("create/withuser")]
         [HttpPost]
         public ReceptionViewModel AddReception(ReceptionViewModel rec)
@@ -212,6 +233,8 @@ namespace DentalDiary.Controllers
                 
             var person = db.Persons.Single(p => p.Id == rec.PersonId);
             person.LastVisit = rec.Date;
+            if (person.FirstVisit == null)
+                person.FirstVisit = rec.Date;
             var city = db.Cities.Single(c => c.Id == rec.CityId);
             dataRecertion.Preson = person;
             dataRecertion.City = city;

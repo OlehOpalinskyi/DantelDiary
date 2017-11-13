@@ -1,11 +1,8 @@
 ﻿using DentalDiary.Data;
 using DentalDiary.Data.Models;
 using DentalDiary.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using static AutoMapper.Mapper;
 
@@ -81,6 +78,17 @@ namespace DentalDiary.Controllers
 
             return Map<PersonViewModel>(originPerson);
 
+        }
+
+        [HttpPut]
+        [Route("edit/comment")]
+        public ReceptionViewModel AddComment(int id, string comment)
+        {
+            var order = db.Receptions.Single(o => o.Id == id);
+            order.Comment = comment;
+            db.SaveChanges();
+
+            return Map<ReceptionViewModel>(order);
         }
     }
 }

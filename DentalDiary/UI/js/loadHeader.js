@@ -1,4 +1,4 @@
-var baseUrl = "http://stomat.pp.ua/"
+var baseUrl = "http://localhost:50612/"
 function loadCity() {
         $.ajax({
             url: baseUrl + "city/all",
@@ -35,6 +35,9 @@ function DeleteNulls(selector) {
     $("tr td").map(function (index, item) {
         if ($(item).text() == "null")
             $(item).text("");
+
+        if ($(item).find('input').val() == "null")
+            $(item).find('input').val("");
     });
 }
 
